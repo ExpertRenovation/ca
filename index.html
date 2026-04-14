@@ -1,1203 +1,1094 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Expert Renovation — London & Nearby Cities</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ATELIER — Visual Experience</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,200;0,300;1,200;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--stone:#F5F2EE;--stone-dark:#E8E3DC;--ink:#1A1814;--ink-mid:#4A4640;--ink-light:#7A7570;--gold:#B08D57;--gold-light:#D4B483;--white:#FFFFFF;--radius:4px}
-html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--ink);line-height:1.6;font-size:16px}
-/* URGENCY */
-.urgency{background:var(--ink);color:var(--white);text-align:center;padding:.55rem 2rem;font-size:.8rem;position:relative}
-.urgency span{color:var(--gold-light);font-weight:500}
-.urgency-x{position:absolute;right:1rem;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,.4);cursor:pointer;font-size:1rem;line-height:1}
-/* ADMIN BAR */
-.admin-bar{display:none;background:#111d2b;color:rgba(255,255,255,.7);padding:.5rem 2rem;font-size:.78rem;align-items:center;justify-content:space-between}
-.admin-bar.on{display:flex}
-.abadge{background:var(--gold);color:#fff;font-size:.62rem;font-weight:700;padding:.12rem .5rem;border-radius:10px;text-transform:uppercase;letter-spacing:.05em}
-.abar-btn{background:none;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.6);padding:.22rem .65rem;border-radius:var(--radius);font-family:'DM Sans',sans-serif;font-size:.72rem;cursor:pointer}
-.abar-btn:hover{border-color:rgba(255,255,255,.5);color:#fff}
-/* NAV */
-nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.97);border-bottom:1px solid var(--stone-dark);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;backdrop-filter:blur(8px)}
-.nav-logo{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--ink);text-decoration:none}
-.nav-logo span{color:var(--gold)}
-.nav-links{display:flex;gap:1.4rem;list-style:none}
-.nav-links a{font-size:.83rem;color:var(--ink-mid);text-decoration:none;transition:color .2s}
-.nav-links a:hover{color:var(--gold)}
-.nav-r{display:flex;align-items:center;gap:.7rem}
-.nav-cta{background:var(--gold);color:#fff;border:none;padding:.55rem 1.2rem;font-family:'DM Sans',sans-serif;font-size:.83rem;font-weight:500;border-radius:var(--radius);cursor:pointer;transition:background .2s}
-.nav-cta:hover{background:var(--ink)}
-.nav-admin{background:none;border:1px solid var(--stone-dark);color:var(--ink-light);padding:.48rem .85rem;font-family:'DM Sans',sans-serif;font-size:.75rem;border-radius:var(--radius);cursor:pointer;transition:all .2s}
-.nav-admin:hover{border-color:var(--gold);color:var(--gold)}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
-.hamburger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px}
-.mob-menu{display:none;position:fixed;top:64px;left:0;right:0;background:#fff;border-bottom:1px solid var(--stone-dark);padding:1.5rem 2rem;z-index:199;flex-direction:column;gap:1rem}
-.mob-menu.open{display:flex}
-.mob-menu a{font-size:1rem;color:var(--ink-mid);text-decoration:none;border-bottom:1px solid var(--stone-dark);padding-bottom:.75rem}
-/* OVERLAY */
-.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:900;align-items:center;justify-content:center;padding:1rem}
-.overlay.on{display:flex}
-.obox{background:#fff;border-radius:8px;padding:2.5rem;max-width:360px;width:100%;position:relative}
-.obox h3{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--ink);margin-bottom:.4rem}
-.obox p{font-size:.85rem;color:var(--ink-light);margin-bottom:1.5rem}
-.ox{position:absolute;top:1rem;right:1rem;background:none;border:none;cursor:pointer;font-size:1.1rem;color:var(--ink-light)}
-.oinp{width:100%;padding:.75rem 1rem;border:1.5px solid var(--stone-dark);border-radius:var(--radius);font-family:'DM Sans',sans-serif;font-size:.875rem;color:var(--ink);outline:none;margin-bottom:.75rem;transition:border-color .2s}
-.oinp:focus{border-color:var(--gold)}
-.obtn{width:100%;background:var(--ink);color:#fff;border:none;padding:.85rem;border-radius:var(--radius);font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:500;cursor:pointer;transition:background .2s}
-.obtn:hover{background:var(--gold)}
-.oerr{display:none;color:#c0392b;font-size:.8rem;margin-top:.5rem;text-align:center}
-.oerr.on{display:block}
-/* LEADS PANEL */
-.leads-panel{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:800;justify-content:flex-end;padding:1rem}
-.leads-panel.on{display:flex}
-.leads-box{background:#fff;width:420px;max-width:100vw;height:calc(100vh - 2rem);border-radius:10px;display:flex;flex-direction:column;overflow:hidden}
-.leads-hdr{background:var(--ink);padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
-.leads-hdr h3{font-family:'Playfair Display',serif;font-size:1.1rem;color:#fff;font-weight:700}
-.leads-x{background:none;border:none;color:rgba(255,255,255,.5);cursor:pointer;font-size:1.2rem;line-height:1}
-.leads-x:hover{color:#fff}
-.leads-body{flex:1;overflow-y:auto;padding:1rem}
-.lead-card{background:var(--stone);border-radius:var(--radius);padding:1rem 1.1rem;margin-bottom:.75rem;border:1px solid var(--stone-dark)}
-.lead-name{font-weight:500;font-size:.92rem;color:var(--ink);margin-bottom:.2rem}
-.lead-meta{font-size:.74rem;color:var(--ink-light);display:flex;flex-wrap:wrap;gap:.35rem .7rem;margin-bottom:.4rem}
-.lead-proj{font-size:.82rem;color:var(--ink-mid);margin-bottom:.35rem}
-.lead-est{display:inline-block;background:var(--gold);color:#fff;font-size:.7rem;font-weight:500;padding:.18rem .55rem;border-radius:10px}
-.lead-time{font-size:.67rem;color:var(--ink-light);margin-top:.3rem}
-.leads-empty{text-align:center;padding:3rem 1rem;color:var(--ink-light);font-size:.88rem}
-/* HERO */
-.hero{min-height:90vh;background:var(--stone);display:grid;grid-template-columns:62fr 38fr;overflow:hidden}
-.hero-left{padding:5rem 3rem 5rem 4rem;display:flex;flex-direction:column;justify-content:center}
-.hero-tag{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:1.25rem}
-.hero-tag::before{content:'';display:block;width:20px;height:1px;background:var(--gold)}
-h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,4.5vw,4rem);font-weight:700;line-height:1.1;color:var(--ink);margin-bottom:1.25rem}
-h1 em{color:var(--gold);font-style:normal}
-.hero-desc{font-size:.98rem;color:var(--ink-mid);max-width:460px;line-height:1.75;margin-bottom:2rem}
-.hero-btns{display:flex;gap:.85rem;flex-wrap:wrap}
-.btn-g{background:var(--gold);color:#fff;padding:.8rem 1.75rem;border:none;border-radius:var(--radius);font-size:.88rem;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .2s,transform .15s}
-.btn-g:hover{background:var(--ink);transform:translateY(-1px)}
-.btn-o{background:transparent;color:var(--ink);padding:.8rem 1.75rem;border:1.5px solid var(--ink);border-radius:var(--radius);font-size:.88rem;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:border-color .2s,color .2s}
-.btn-o:hover{border-color:var(--gold);color:var(--gold)}
-.hero-stats{display:flex;gap:2rem;margin-top:2.5rem;padding-top:2rem;border-top:1px solid var(--stone-dark)}
-.stat-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--ink)}
-.stat-label{font-size:.73rem;color:var(--ink-light);margin-top:2px}
-.cities-strip{margin-top:1.25rem;display:flex;flex-wrap:wrap;gap:.45rem}
-.city-pill{font-size:.7rem;background:#fff;border:1px solid var(--stone-dark);color:var(--ink-mid);padding:.28rem .7rem;border-radius:20px}
-.hero-right{position:relative;overflow:hidden;background:var(--ink)}
-.hero-img-grid{position:absolute;inset:0;display:grid;grid-template-rows:1fr 1fr;gap:3px}
-.hib{display:flex;align-items:center;justify-content:center;background-size:cover;background-position:center;position:relative}
-.hib svg{width:55px;height:55px;opacity:.1}
-.hero-badge{position:absolute;bottom:1.5rem;left:1.5rem;background:#fff;padding:.8rem 1rem;border-radius:var(--radius);display:flex;align-items:center;gap:10px}
-.badge-ico{width:34px;height:34px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.badge-lbl{font-size:.68rem;color:var(--ink-light)}
-.badge-val{font-size:.82rem;font-weight:500;color:var(--ink)}
-/* ADMIN UPLOAD ZONES — only visible in admin mode */
-.aupload{display:none;position:absolute;inset:0;background:rgba(176,141,87,.18);border:3px dashed var(--gold);align-items:center;justify-content:center;cursor:pointer;z-index:5}
-.aupload p{background:#fff;color:var(--gold);font-size:.78rem;font-weight:500;padding:.3rem .8rem;border-radius:20px}
-body.admin .aupload{display:flex}
-body.admin .agallery-up{display:flex}
-body.admin .aslot-up{display:flex}
-body.admin .aba-row{display:flex}
-body.admin .avid-row{display:flex}
-/* COUNTERS */
-.counters{background:var(--ink);padding:3.5rem 4rem}
-.cg{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;text-align:center}
-.cnum{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:700;color:var(--gold-light)}
-.clbl{font-size:.82rem;color:rgba(255,255,255,.5);margin-top:.3rem}
-/* SECTIONS */
-section{padding:5rem 4rem}
-.stag{font-size:.68rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:.9rem}
-.stag::after{content:'';width:40px;height:1px;background:var(--stone-dark)}
-h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.8rem);font-weight:700;line-height:1.15;color:var(--ink);margin-bottom:.9rem}
-.ssub{font-size:.96rem;color:var(--ink-light);max-width:480px;line-height:1.7;margin-bottom:2.5rem}
-/* WHY US */
-.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem}
-.why-card{background:var(--stone);padding:2rem 1.75rem;border-radius:8px;border:1px solid var(--stone-dark)}
-.why-ico{width:48px;height:48px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;margin-bottom:1.1rem;border:1px solid var(--stone-dark)}
-.why-ico svg{width:22px;height:22px;stroke:var(--gold);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.why-t{font-weight:500;font-size:.98rem;color:var(--ink);margin-bottom:.5rem}
-.why-d{font-size:.85rem;color:var(--ink-light);line-height:1.7}
-.cert-row{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2.5rem}
-.cert{display:flex;align-items:center;gap:.5rem;background:var(--stone);border:1px solid var(--stone-dark);border-radius:var(--radius);padding:.5rem 1rem;font-size:.8rem;font-weight:500;color:var(--ink-mid)}
-.cert svg{width:15px;height:15px;stroke:var(--gold);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
-/* SERVICES */
-.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:var(--stone-dark);border:1.5px solid var(--stone-dark)}
-.svc-card{background:#fff;padding:2rem 1.75rem;transition:background .25s;cursor:pointer}
-.svc-card:hover{background:var(--stone)}
-.svc-ico{width:46px;height:46px;margin-bottom:1.25rem;background:var(--stone);border-radius:50%;display:flex;align-items:center;justify-content:center}
-.svc-ico svg{width:20px;height:20px;stroke:var(--gold);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.svc-t{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;margin-bottom:.6rem;color:var(--ink)}
-.svc-d{font-size:.87rem;color:var(--ink-light);line-height:1.7;margin-bottom:1rem}
-.svc-more{font-size:.78rem;font-weight:500;color:var(--gold)}
-/* SERVICE MODALS */
-.smod-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:500;align-items:center;justify-content:center;padding:1rem}
-.smod-overlay.on{display:flex}
-.smod{background:#fff;border-radius:8px;max-width:680px;width:100%;max-height:90vh;overflow-y:auto;position:relative}
-.smod-hdr{padding:2rem 2rem 1.25rem;border-bottom:1px solid var(--stone-dark)}
-.smod-t{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--ink);margin-bottom:.4rem}
-.smod-s{font-size:.9rem;color:var(--ink-light)}
-.smod-x{position:absolute;top:1.25rem;right:1.25rem;background:none;border:none;cursor:pointer;font-size:1.4rem;color:var(--ink-light)}
-.smod-x:hover{color:var(--ink)}
-.smod-body{padding:1.75rem 2rem}
-/* PHOTO SLOT */
-.pslot{width:100%;height:200px;background:var(--stone);border-radius:var(--radius);margin-bottom:1.5rem;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.5rem}
-.pslot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.pslot svg{width:30px;height:30px;stroke:var(--ink-light);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.pslot p{font-size:.8rem;color:var(--ink-light)}
-.aslot-up{display:none;position:absolute;inset:0;background:rgba(176,141,87,.18);border:2.5px dashed var(--gold);align-items:center;justify-content:center;cursor:pointer;flex-direction:column;gap:.35rem}
-.aslot-up span{font-size:.76rem;font-weight:500;color:var(--gold);background:#fff;padding:.28rem .7rem;border-radius:20px}
-.smod-txt{font-size:.9rem;color:var(--ink-mid);line-height:1.8;margin-bottom:1.25rem}
-.smod-feats{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:.5rem .75rem;margin-bottom:1.5rem}
-.smod-feats li{display:flex;align-items:flex-start;gap:.5rem;font-size:.85rem;color:var(--ink-mid)}
-.smod-feats li::before{content:'✓';color:var(--gold);font-weight:700;flex-shrink:0}
-.smod-cta{width:100%;background:var(--gold);color:#fff;border:none;padding:.9rem;border-radius:var(--radius);font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:500;cursor:pointer;transition:background .2s}
-.smod-cta:hover{background:var(--ink)}
-/* BEFORE / AFTER */
-.ba-wrap{position:relative;width:100%;max-width:700px;height:380px;border-radius:8px;overflow:hidden;cursor:col-resize;user-select:none;margin:0 auto}
-.ba-before,.ba-after{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background-size:cover;background-position:center}
-.ba-before{background-color:#2a2620}
-.ba-after{background-color:var(--gold)}
-.ba-txt{font-family:'Playfair Display',serif;font-size:1.4rem;color:rgba(255,255,255,.2)}
-.ba-lbl{position:absolute;bottom:1rem;padding:.3rem .8rem;border-radius:20px;font-size:.75rem;font-weight:500}
-.ba-before .ba-lbl{left:1rem;background:rgba(0,0,0,.5);color:#fff}
-.ba-after .ba-lbl{right:1rem;background:var(--gold);color:#fff}
-.ba-clip{position:absolute;inset:0;overflow:hidden}
-.ba-div{position:absolute;top:0;bottom:0;width:3px;background:#fff;z-index:10;transform:translateX(-50%)}
-.ba-handle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:40px;height:40px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.25)}
-.ba-handle svg{width:18px;height:18px;stroke:var(--ink);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.aba-row{display:none;gap:1rem;margin-top:1rem;max-width:700px;margin-left:auto;margin-right:auto}
-.aba-btn{flex:1;padding:.6rem;border:1.5px dashed var(--stone-dark);border-radius:var(--radius);background:#fff;font-family:'DM Sans',sans-serif;font-size:.8rem;color:var(--ink-mid);cursor:pointer;text-align:center;transition:all .2s}
-.aba-btn:hover{border-color:var(--gold);color:var(--gold)}
-/* GALLERY */
-.gal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
-.gal-slot{position:relative;aspect-ratio:4/3;background:var(--stone-dark);border-radius:var(--radius);overflow:hidden;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.4rem}
-.gal-slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.gal-slot svg{width:26px;height:26px;stroke:var(--ink-light);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.gal-slot p{font-size:.7rem;color:var(--ink-light);text-align:center;padding:0 .5rem}
-.agallery-up{display:none;position:absolute;inset:0;background:rgba(176,141,87,.15);border:2px dashed var(--gold);align-items:center;justify-content:center;cursor:pointer;flex-direction:column;gap:.3rem}
-.agallery-up span{font-size:.7rem;font-weight:500;color:var(--gold);background:#fff;padding:.22rem .6rem;border-radius:20px}
-.gal-rm{display:none;position:absolute;top:.4rem;right:.4rem;background:rgba(0,0,0,.65);color:#fff;border:none;border-radius:50%;width:22px;height:22px;font-size:.7rem;cursor:pointer;align-items:center;justify-content:center;z-index:5}
-body.admin .gal-slot:hover .gal-rm{display:flex}
-/* VIDEO */
-.vid-sec{background:var(--ink);padding:5rem 4rem}
-.vid-sec h2{color:#fff}
-.vid-sec .stag{color:var(--gold-light)}
-.vid-sec .stag::after{background:rgba(255,255,255,.1)}
-.vid-sec .ssub{color:rgba(255,255,255,.5)}
-.vid-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
-.vid-slot{aspect-ratio:16/9;background:rgba(255,255,255,.05);border:2px solid rgba(255,255,255,.1);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem;position:relative;overflow:hidden}
-.vid-slot svg{width:40px;height:40px;stroke:rgba(255,255,255,.25);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.vid-slot p{font-size:.8rem;color:rgba(255,255,255,.3);text-align:center;padding:0 1.5rem}
-.vid-slot iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
-.avid-row{display:none;gap:.5rem;margin-top:.75rem}
-.vid-url-in{flex:1;padding:.5rem .75rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:var(--radius);font-family:'DM Sans',sans-serif;font-size:.78rem;color:#fff;outline:none}
-.vid-url-in::placeholder{color:rgba(255,255,255,.3)}
-.vid-emb-btn{padding:.5rem .85rem;background:var(--gold);border:none;border-radius:var(--radius);font-family:'DM Sans',sans-serif;font-size:.75rem;font-weight:500;color:#fff;cursor:pointer}
-/* PROCESS */
-.proc-sec{background:var(--stone)}
-.proc-sec .stag::after{background:var(--stone-dark)}
-.proc-steps{display:grid;grid-template-columns:repeat(4,1fr);position:relative}
-.proc-steps::before{content:'';position:absolute;top:28px;left:10%;right:10%;height:1px;background:var(--stone-dark)}
-.proc-step{padding:0 1.25rem 0 0}
-.step-num{width:56px;height:56px;border-radius:50%;border:1px solid var(--stone-dark);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--gold);margin-bottom:1.25rem;background:#fff}
-.step-t{font-weight:500;font-size:.9rem;color:var(--ink);margin-bottom:.4rem}
-.step-d{font-size:.82rem;color:var(--ink-light);line-height:1.7}
-/* FINANCING */
-.fin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem}
-.fin-card{border:1.5px solid var(--stone-dark);border-radius:8px;padding:2rem 1.75rem;text-align:center;transition:border-color .2s,transform .2s}
-.fin-card:hover{border-color:var(--gold);transform:translateY(-3px)}
-.fin-card.feat{border-color:var(--gold);background:var(--stone)}
-.fin-lbl{font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
-.fin-t{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--ink);margin-bottom:.75rem}
-.fin-d{font-size:.85rem;color:var(--ink-light);line-height:1.7;margin-bottom:1.25rem}
-.fin-feats{list-style:none;text-align:left;display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.5rem}
-.fin-feats li{font-size:.83rem;color:var(--ink-mid);display:flex;align-items:center;gap:.5rem}
-.fin-feats li::before{content:'✓';color:var(--gold);font-weight:700}
-.fin-btn{width:100%;padding:.75rem;border-radius:var(--radius);font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:500;cursor:pointer;border:1.5px solid var(--ink);background:transparent;color:var(--ink);transition:all .2s}
-.fin-btn:hover,.fin-card.feat .fin-btn{background:var(--gold);border-color:var(--gold);color:#fff}
-/* REVIEWS */
-.rev-sec{background:var(--stone)}
-.rev-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem}
-.rev-card{background:#fff;padding:1.75rem;border-radius:var(--radius);border:1px solid var(--stone-dark);transition:transform .2s}
-.rev-card:hover{transform:translateY(-3px)}
-.stars{display:flex;gap:3px;margin-bottom:.85rem}
-.star{width:13px;height:13px;background:var(--gold);clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
-.gbadge{display:inline-flex;align-items:center;gap:5px;font-size:.68rem;color:var(--ink-light);border:1px solid var(--stone-dark);border-radius:20px;padding:2px 8px;margin-bottom:.6rem}
-.rev-txt{font-size:.87rem;color:var(--ink-mid);line-height:1.75;margin-bottom:1.25rem;font-style:italic}
-.rev-auth{display:flex;align-items:center;gap:10px}
-.rev-av{width:36px;height:36px;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:500;color:#fff;flex-shrink:0}
-.rev-name{font-size:.85rem;font-weight:500;color:var(--ink)}
-.rev-loc{font-size:.72rem;color:var(--ink-light)}
-.rat-sum{background:#fff;border:1px solid var(--stone-dark);border-radius:var(--radius);padding:1.75rem;display:flex;align-items:center;gap:2rem;margin-bottom:1.75rem}
-.rat-big{font-family:'Playfair Display',serif;font-size:3.5rem;font-weight:700;color:var(--ink);line-height:1}
-/* FAQ */
-.faq-list{max-width:760px;display:flex;flex-direction:column;gap:.75rem;margin-top:2rem}
-.faq-item{border:1px solid var(--stone-dark);border-radius:var(--radius);overflow:hidden}
-.faq-q{width:100%;padding:1.1rem 1.25rem;background:#fff;border:none;text-align:left;font-family:'DM Sans',sans-serif;font-size:.92rem;font-weight:500;color:var(--ink);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem;transition:background .2s}
-.faq-q:hover,.faq-q.open{background:var(--stone)}
-.faq-ico{transition:transform .25s;color:var(--gold);font-size:1.1rem;line-height:1;flex-shrink:0}
-.faq-q.open .faq-ico{transform:rotate(45deg)}
-.faq-a{display:none;padding:1rem 1.25rem 1.25rem;font-size:.88rem;color:var(--ink-mid);line-height:1.8;border-top:1px solid var(--stone-dark)}
-.faq-a.open{display:block}
-/* QUOTE */
-.quote-sec{background:var(--stone);border-top:1px solid var(--stone-dark)}
-.q-inner{display:grid;grid-template-columns:1fr 1.2fr;gap:4rem;align-items:start}
-.clist{display:flex;flex-direction:column;gap:.7rem;margin-bottom:2rem}
-.citem{display:flex;align-items:center;gap:10px;font-size:.86rem;color:var(--ink-mid)}
-.citem svg{width:15px;height:15px;stroke:var(--gold);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
-.qform{background:#fff;padding:2rem;border-radius:8px;border:1px solid var(--stone-dark)}
-.qform h3{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--ink);margin-bottom:1.25rem}
-.fg{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-bottom:.7rem}
-.fi{width:100%;padding:.7rem .95rem;border:1.5px solid var(--stone-dark);border-radius:var(--radius);font-family:'DM Sans',sans-serif;font-size:.875rem;color:var(--ink);background:#fff;transition:border-color .2s;outline:none}
-.fi:focus{border-color:var(--gold)}
-.fi::placeholder{color:var(--ink-light)}
-textarea.fi{resize:vertical;min-height:85px}
-.ff{margin-bottom:.7rem}
-.fsub{width:100%;background:var(--gold);color:#fff;border:none;padding:.85rem;border-radius:var(--radius);font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:500;cursor:pointer;transition:background .2s;margin-top:.25rem}
-.fsub:hover{background:var(--ink)}
-.fsuccess{display:none;background:#eaf3de;border:1px solid #c0dd97;border-radius:var(--radius);padding:1rem;text-align:center;font-size:.88rem;color:#3b6d11;margin-top:.75rem}
-.fsuccess.on{display:block}
-/* FOOTER */
-footer{background:var(--ink);color:rgba(255,255,255,.45);padding:2.5rem 4rem;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:1rem}
-.flogo{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:#fff;text-decoration:none}
-/* AI CHAT */
-.chat-fab{position:fixed;bottom:1.75rem;right:1.75rem;z-index:1000;width:62px;height:62px;border-radius:50%;background:var(--gold);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(176,141,87,.5);transition:transform .2s,background .2s}
-.chat-fab:hover{background:var(--ink);transform:scale(1.08)}
-.chat-fab svg{width:26px;height:26px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.chat-dot{position:absolute;top:4px;right:4px;width:13px;height:13px;background:#2d7a4f;border-radius:50%;border:2px solid #fff}
-.chat-win{position:fixed;bottom:5.75rem;right:1.75rem;z-index:1000;width:360px;background:#fff;border-radius:14px;border:1px solid var(--stone-dark);box-shadow:0 10px 50px rgba(0,0,0,.16);display:none;flex-direction:column;overflow:hidden;max-height:580px}
-.chat-win.on{display:flex}
-.chat-hdr{background:var(--ink);padding:1rem 1.25rem;display:flex;align-items:center;gap:.75rem}
-.chat-av{width:38px;height:38px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.chat-av svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.chat-inf{flex:1}
-.chat-name{font-size:.88rem;font-weight:500;color:#fff}
-.chat-status{font-size:.7rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:4px}
-.chat-status::before{content:'';width:7px;height:7px;border-radius:50%;background:#2d7a4f;flex-shrink:0}
-.chat-xcl{background:none;border:none;color:rgba(255,255,255,.45);cursor:pointer;font-size:1.1rem;line-height:1}
-.chat-xcl:hover{color:#fff}
-.chat-msgs{flex:1;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:.75rem;min-height:240px}
-.cm{max-width:86%;padding:.65rem .9rem;border-radius:12px;font-size:.84rem;line-height:1.55}
-.cm.bot{background:var(--stone);color:var(--ink);align-self:flex-start;border-bottom-left-radius:3px}
-.cm.user{background:var(--gold);color:#fff;align-self:flex-end;border-bottom-right-radius:3px}
-.cm.typing{background:var(--stone);align-self:flex-start;border-bottom-left-radius:3px;padding:.75rem .9rem}
-.tdots{display:flex;gap:4px;align-items:center}
-.tdots span{width:7px;height:7px;border-radius:50%;background:var(--ink-light);animation:td 1.2s infinite}
-.tdots span:nth-child(2){animation-delay:.2s}
-.tdots span:nth-child(3){animation-delay:.4s}
-@keyframes td{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
-.chat-quick{padding:.6rem 1rem;display:flex;flex-wrap:wrap;gap:.4rem;border-top:1px solid var(--stone-dark)}
-.cqb{font-size:.72rem;padding:.3rem .7rem;border-radius:20px;border:1px solid var(--stone-dark);background:#fff;color:var(--ink-mid);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s}
-.cqb:hover{background:var(--stone);border-color:var(--gold)}
-.chat-in-row{padding:.75rem 1rem;border-top:1px solid var(--stone-dark);display:flex;gap:.5rem;align-items:center}
-.chat-in{flex:1;padding:.55rem .85rem;border:1.5px solid var(--stone-dark);border-radius:20px;font-family:'DM Sans',sans-serif;font-size:.84rem;color:var(--ink);outline:none;transition:border-color .2s}
-.chat-in:focus{border-color:var(--gold)}
-.chat-send{width:34px;height:34px;border-radius:50%;background:var(--gold);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s}
-.chat-send:hover{background:var(--ink)}
-.chat-send svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
-.est-card{background:linear-gradient(135deg,#B08D57,#D4B483);border-radius:10px;padding:1rem 1.1rem;color:#fff;align-self:flex-start;max-width:90%;margin-top:.1rem}
-.est-lbl{font-size:.66rem;opacity:.8;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.2rem}
-.est-range{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700}
-.est-note{font-size:.7rem;opacity:.75;margin-top:.3rem;line-height:1.4}
-/* MOBILE */
-@media(max-width:900px){
-  .nav-links,.nav-admin{display:none}.hamburger{display:flex}
-  .hero{grid-template-columns:1fr;min-height:auto}.hero-left{padding:3rem 1.5rem 2.5rem}.hero-right{height:200px}
-  .counters{padding:3rem 1.5rem}.cg{grid-template-columns:repeat(2,1fr)}
-  .why-grid{grid-template-columns:1fr 1fr}
-  section{padding:3.5rem 1.5rem}
-  .svc-grid{grid-template-columns:1fr 1fr}
-  .proc-steps{grid-template-columns:1fr 1fr;gap:2rem}.proc-steps::before{display:none}
-  .rev-grid{grid-template-columns:1fr}
-  .gal-grid{grid-template-columns:repeat(2,1fr)}
-  .vid-grid{grid-template-columns:1fr}
-  .fin-grid{grid-template-columns:1fr}
-  .q-inner{grid-template-columns:1fr;gap:2rem}
-  footer{grid-template-columns:1fr;text-align:center;padding:1.5rem}
-  .rat-sum{flex-direction:column;gap:1rem}
-  .chat-win{width:calc(100vw - 2rem);right:1rem}
-  .leads-box{width:100%}
+
+/* ─────────────────────────────────────────────
+   RESET & BASE
+───────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
-@media(max-width:560px){
-  .svc-grid,.why-grid{grid-template-columns:1fr}
-  .hero-btns{flex-direction:column}.btn-g,.btn-o{text-align:center}
-  .smod-feats,.fg{grid-template-columns:1fr}
-  footer{padding:2rem 1.5rem}
+
+:root {
+  --gold: #c9a84c;
+  --bg: #0a0a0a;
+  --charcoal: #111111;
+  --deep: #0e0e0e;
+  --white: #f0ede8;
+  --muted: #5a5a5a;
+  --ease-cinematic: cubic-bezier(0.76, 0, 0.24, 1);
 }
+
+html {
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'DM Mono', monospace;
+  font-weight: 300;
+  cursor: none;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─────────────────────────────────────────────
+   GRAIN OVERLAY
+───────────────────────────────────────────── */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 0.04;
+  width: 100%;
+  height: 100%;
+}
+
+/* ─────────────────────────────────────────────
+   LETTERBOX BARS
+───────────────────────────────────────────── */
+.letterbox-top,
+.letterbox-bottom {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 7vh;
+  background: #000;
+  z-index: 9997;
+}
+.letterbox-top { top: 0; }
+.letterbox-bottom { bottom: 0; }
+
+/* ─────────────────────────────────────────────
+   CUSTOM CURSOR
+───────────────────────────────────────────── */
+#cursor-dot {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: var(--white);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+}
+
+#cursor-ring {
+  position: fixed;
+  width: 32px;
+  height: 32px;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+}
+
+#cursor-ring::before,
+#cursor-ring::after {
+  content: '';
+  position: absolute;
+  background: rgba(240, 237, 232, 0.35);
+}
+#cursor-ring::before {
+  width: 1px;
+  height: 100%;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+}
+#cursor-ring::after {
+  width: 100%;
+  height: 1px;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+/* ─────────────────────────────────────────────
+   PAGE LOAD OVERLAY
+───────────────────────────────────────────── */
+#page-overlay {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 9996;
+  transition: opacity 1.2s cubic-bezier(0.76, 0, 0.24, 1);
+}
+#page-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ─────────────────────────────────────────────
+   NAV
+───────────────────────────────────────────── */
+nav {
+  position: fixed;
+  top: 7vh;
+  left: 0;
+  right: 0;
+  z-index: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.6rem 3.5rem;
+}
+
+.nav-logo {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--white);
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 3rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s var(--ease-cinematic);
+}
+
+.nav-links a:hover { color: var(--white); }
+.nav-links a:hover::after { transform: scaleX(1); }
+
+/* ─────────────────────────────────────────────
+   REVEAL ANIMATION
+───────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s var(--ease-cinematic),
+              transform 0.9s var(--ease-cinematic);
+}
+
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─────────────────────────────────────────────
+   SECTION 1 — HERO
+───────────────────────────────────────────── */
+#hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-headline {
+  font-family: 'Cormorant Garant', serif;
+  font-weight: 200;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+}
+
+.hero-line {
+  display: block;
+  font-size: clamp(5vw, 11vw, 11vw);
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 0.9s var(--ease-cinematic),
+              transform 0.9s var(--ease-cinematic);
+}
+
+.hero-line.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-line:nth-child(1) { transition-delay: 0.1s; }
+.hero-line:nth-child(2) {
+  transition-delay: 0.3s;
+  padding-left: 9vw;
+  font-style: italic;
+}
+.hero-line:nth-child(3) {
+  transition-delay: 0.5s;
+  text-align: right;
+}
+
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 3rem;
+  opacity: 0;
+  transition: opacity 0.9s var(--ease-cinematic) 0s;
+}
+
+.hero-eyebrow.visible { opacity: 1; }
+
+.hero-subtitle {
+  position: absolute;
+  bottom: 14vh;
+  left: 5rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: 0;
+  transition: opacity 0.9s var(--ease-cinematic) 0.8s;
+}
+
+.hero-subtitle.visible { opacity: 1; }
+
+.scroll-cue {
+  position: absolute;
+  bottom: 13vh;
+  right: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  opacity: 0;
+  transition: opacity 0.9s ease 1.1s;
+}
+
+.scroll-cue.visible { opacity: 1; }
+
+.scroll-cue-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.scroll-line {
+  width: 1px;
+  height: 64px;
+  background: rgba(255,255,255,0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.scroll-line::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--gold);
+  animation: scrollDown 1.9s cubic-bezier(0.76,0,0.24,1) infinite;
+}
+
+@keyframes scrollDown {
+  0%   { top: -100%; }
+  100% { top: 100%; }
+}
+
+/* ─────────────────────────────────────────────
+   SECTION 2 — STATEMENT
+───────────────────────────────────────────── */
+#statement {
+  min-height: 55vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10vh 10rem;
+  background: var(--charcoal);
+}
+
+.statement-text {
+  font-family: 'Cormorant Garant', serif;
+  font-weight: 200;
+  font-style: italic;
+  font-size: clamp(2.5rem, 5.5vw, 5.5vw);
+  line-height: 1.25;
+  text-align: center;
+  max-width: 1000px;
+}
+
+.statement-text .word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.55s var(--ease-cinematic),
+              transform 0.55s var(--ease-cinematic);
+}
+
+.statement-text .word.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─────────────────────────────────────────────
+   SECTION 3 — HORIZONTAL SCROLL
+───────────────────────────────────────────── */
+#horizontal-section {
+  position: relative;
+  height: 500vh;
+}
+
+#horizontal-sticky {
+  position: sticky;
+  top: 7vh;
+  height: 86vh;
+  overflow: hidden;
+}
+
+#horizontal-track {
+  display: flex;
+  height: 100%;
+  width: 400vw;
+}
+
+.h-card {
+  flex: 0 0 100vw;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.h-card:nth-child(1) { background: #0d0d0d; }
+.h-card:nth-child(2) { background: #101010; }
+.h-card:nth-child(3) { background: #0e0e0f; }
+.h-card:nth-child(4) { background: #0f0f0e; }
+
+.h-card-number {
+  position: absolute;
+  font-family: 'Cormorant Garant', serif;
+  font-weight: 200;
+  font-size: 20vw;
+  color: rgba(255, 255, 255, 0.035);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  user-select: none;
+  white-space: nowrap;
+}
+
+.h-card-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 8rem;
+  max-width: 720px;
+}
+
+.h-card-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 2.2rem;
+  display: block;
+}
+
+.h-card-title {
+  font-family: 'Cormorant Garant', serif;
+  font-weight: 200;
+  font-size: clamp(2rem, 4.5vw, 4.5vw);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.h-card-desc {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+  margin-top: 2.2rem;
+  line-height: 1.9;
+  max-width: 380px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.h-card-index {
+  position: absolute;
+  bottom: 3.5rem;
+  right: 4rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.h-progress {
+  position: absolute;
+  bottom: 3.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.9rem;
+  z-index: 10;
+}
+
+.h-progress-dot {
+  width: 24px;
+  height: 1px;
+  background: rgba(255,255,255,0.12);
+  transition: background 0.3s ease, width 0.3s ease;
+}
+
+.h-progress-dot.active {
+  background: var(--gold);
+  width: 40px;
+}
+
+/* ─────────────────────────────────────────────
+   SECTION 4 — SPLIT FEATURE
+───────────────────────────────────────────── */
+#split-feature {
+  display: grid;
+  grid-template-columns: 60fr 40fr;
+  min-height: 88vh;
+  background: var(--deep);
+}
+
+.split-image {
+  position: relative;
+  overflow: hidden;
+  background: #161616;
+}
+
+.split-image-inner {
+  position: absolute;
+  inset: -12%;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(255,255,255,0.007) 2px,
+      rgba(255,255,255,0.007) 4px
+    ),
+    linear-gradient(135deg, #1c1c1c 0%, #0d0d0d 55%, #161614 100%);
+  will-change: transform;
+}
+
+.split-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0,0,0,0.12) 3px,
+    rgba(0,0,0,0.12) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.split-image-label {
+  position: absolute;
+  top: 4rem;
+  left: 3.5rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  z-index: 2;
+}
+
+.split-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 7rem 5.5rem 7rem 7rem;
+  position: relative;
+  border-left: 1px solid rgba(201, 168, 76, 0.15);
+}
+
+.split-text::before {
+  content: '';
+  position: absolute;
+  left: -1px;
+  top: 18%;
+  height: 64%;
+  width: 1px;
+  background: var(--gold);
+}
+
+.split-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 3rem;
+}
+
+.split-heading {
+  font-family: 'Cormorant Garant', serif;
+  font-weight: 200;
+  font-size: clamp(1.8rem, 3.4vw, 3.4vw);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  margin-bottom: 2.8rem;
+}
+
+.split-body {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  line-height: 2.1;
+  max-width: 340px;
+  margin-bottom: 3.5rem;
+}
+
+.text-link {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--white);
+  text-decoration: none;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.text-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--white);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s var(--ease-cinematic);
+}
+
+.text-link:hover::after { transform: scaleX(1); }
+
+/* ─────────────────────────────────────────────
+   SECTION 5 — MARQUEE
+───────────────────────────────────────────── */
+#marquee-section {
+  padding: 4.5vh 0;
+  background: var(--bg);
+  border-top: 1px solid #191919;
+  border-bottom: 1px solid #191919;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marquee-track {
+  display: inline-flex;
+  animation: marqueeScroll 24s linear infinite;
+}
+
+.marquee-item {
+  font-family: 'Cormorant Garant', serif;
+  font-weight: 200;
+  font-size: clamp(2rem, 4.5vw, 4.5vw);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(240, 237, 232, 0.2);
+  padding: 0 3.5vw;
+  user-select: none;
+}
+
+.marquee-item.gold {
+  -webkit-text-stroke: 1px rgba(201, 168, 76, 0.45);
+}
+
+@keyframes marqueeScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ─────────────────────────────────────────────
+   SECTION 6 — CONTENT BLOCK
+───────────────────────────────────────────── */
+#content-block {
+  padding: 13vh 5.5rem;
+  background: var(--charcoal);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.content-col-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 2rem;
+  display: block;
+}
+
+.content-col-heading {
+  font-family: 'Cormorant Garant', serif;
+  font-weight: 200;
+  font-size: clamp(1.5rem, 2.2vw, 2.2vw);
+  line-height: 1.15;
+  margin-bottom: 1.6rem;
+}
+
+.content-col-body {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  line-height: 2;
+}
+
+/* ─────────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────────── */
+footer {
+  padding: 5vh 5.5rem 15vh;
+  background: #000;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: end;
+  border-top: 1px solid #191919;
+  row-gap: 4rem;
+}
+
+.footer-divider {
+  grid-column: 1 / -1;
+  height: 1px;
+  background: #191919;
+}
+
+.footer-left {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  line-height: 2.2;
+}
+
+.footer-left .footer-name {
+  display: block;
+  color: var(--white);
+  font-size: 11px;
+  margin-bottom: 0.4rem;
+}
+
+.footer-nav {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.1rem;
+}
+
+.footer-nav a {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.footer-nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s var(--ease-cinematic);
+}
+
+.footer-nav a:hover { color: var(--white); }
+.footer-nav a:hover::after { transform: scaleX(1); }
+
+.footer-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.footer-right a {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-right a:hover { color: var(--white); }
+
 </style>
 </head>
 <body>
 
-<!-- URGENCY BANNER -->
-<div class="urgency" id="ub">🎉 <span>Limited spots available this month</span> — Book your free consultation now!<button class="urgency-x" onclick="document.getElementById('ub').style.display='none'">✕</button></div>
+<!-- GRAIN TEXTURE -->
+<svg class="grain" xmlns="http://www.w3.org/2000/svg">
+  <filter id="grain-filter" x="0%" y="0%" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.68" numOctaves="4" stitchTiles="stitch"/>
+    <feColorMatrix type="saturate" values="0"/>
+  </filter>
+  <rect width="100%" height="100%" filter="url(#grain-filter)"/>
+</svg>
 
-<!-- ADMIN BAR -->
-<div class="admin-bar" id="adminBar">
-  <div style="display:flex;align-items:center;gap:.6rem"><span class="abadge">Admin</span><span>Admin mode active — upload photos, add videos, manage content</span></div>
-  <div style="display:flex;gap:.75rem">
-    <button class="abar-btn" onclick="openLeads()">📋 View Leads</button>
-    <button class="abar-btn" onclick="doLogout()">Log Out</button>
-  </div>
-</div>
+<!-- LETTERBOX -->
+<div class="letterbox-top"></div>
+<div class="letterbox-bottom"></div>
+
+<!-- CURSOR -->
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<!-- PAGE OVERLAY -->
+<div id="page-overlay"></div>
 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="#">Expert <span>Renovation</span></a>
+  <a href="#hero" class="nav-logo">Atelier</a>
   <ul class="nav-links">
-    <li><a href="#services">Services</a></li>
-    <li><a href="#gallery">Gallery</a></li>
-    <li><a href="#financing">Financing</a></li>
-    <li><a href="#reviews">Reviews</a></li>
-    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#statement">Work</a></li>
+    <li><a href="#split-feature">Studio</a></li>
+    <li><a href="#marquee-section">Process</a></li>
+    <li><a href="#content-block">About</a></li>
   </ul>
-  <div class="nav-r">
-    <button class="nav-cta" onclick="scrollTo('quote')">Free Quote</button>
-    <button class="nav-admin" onclick="openLogin()" id="adminNavBtn">🔒 Admin</button>
-  </div>
-  <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
 </nav>
-<div class="mob-menu" id="mobMenu">
-  <a href="#services" onclick="closeMenu()">Services</a>
-  <a href="#gallery" onclick="closeMenu()">Gallery</a>
-  <a href="#financing" onclick="closeMenu()">Financing</a>
-  <a href="#reviews" onclick="closeMenu()">Reviews</a>
-  <a href="#faq" onclick="closeMenu()">FAQ</a>
-  <button class="nav-cta" style="width:100%;padding:.75rem;margin-top:.5rem" onclick="closeMenu();scrollTo('quote')">Get a Free Quote</button>
-</div>
 
-<!-- ADMIN LOGIN MODAL -->
-<div class="overlay" id="loginModal">
-  <div class="obox">
-    <button class="ox" onclick="closeLogin()">✕</button>
-    <h3>Admin Login</h3>
-    <p>Enter your password to access content management and view customer leads.</p>
-    <input class="oinp" type="password" id="loginPass" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()"/>
-    <button class="obtn" onclick="doLogin()">Login</button>
-    <div class="oerr" id="loginErr">Incorrect password. Please try again.</div>
+<!-- ████  HERO  ████ -->
+<section id="hero">
+  <p class="hero-eyebrow">Spatial design &amp; visual direction</p>
+  <h1 class="hero-headline" aria-label="Form Follows Vision">
+    <span class="hero-line">Form</span>
+    <span class="hero-line">Follows</span>
+    <span class="hero-line">Vision</span>
+  </h1>
+  <p class="hero-subtitle">Est. MMXXIV &nbsp;—&nbsp; Tokyo / Oslo / São Paulo</p>
+  <div class="scroll-cue">
+    <span class="scroll-cue-label">Scroll</span>
+    <div class="scroll-line"></div>
   </div>
-</div>
+</section>
 
-<!-- LEADS PANEL -->
-<div class="leads-panel" id="leadsPanel" onclick="if(event.target===this)closeLeads()">
-  <div class="leads-box">
-    <div class="leads-hdr">
-      <h3>Customer Leads &amp; Estimates</h3>
-      <button class="leads-x" onclick="closeLeads()">✕</button>
-    </div>
-    <div class="leads-body" id="leadsBody">
-      <div class="leads-empty">No leads yet. When customers use the AI estimator and share their details, they'll appear here.</div>
-    </div>
-  </div>
-</div>
+<!-- ████  STATEMENT  ████ -->
+<section id="statement">
+  <p class="statement-text">
+    We do not decorate space — we interrogate it, until the architecture confesses what it was always meant to become.
+  </p>
+</section>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-left">
-    <div class="hero-tag">London, ON &amp; Nearby Cities · 5.0 ★ Google</div>
-    <h1>Your Space,<br><em>Expertly</em><br>Transformed</h1>
-    <p class="hero-desc">Expert Renovation delivers premium kitchen, bathroom, basement &amp; full-home renovations across London and surrounding communities. Beautiful results, on time, on budget.</p>
-    <div class="hero-btns">
-      <button class="btn-g" onclick="window.location.href='tel:4379950633'">📞 Call (437) 995-0633</button>
-      <button class="btn-o" onclick="openChat()">💬 Get Free AI Estimate</button>
-    </div>
-    <div class="hero-stats">
-      <div><div class="stat-num counter" data-target="500">0</div><div class="stat-label">Projects Done</div></div>
-      <div><div class="stat-num counter" data-target="20">0</div><div class="stat-label">Years Experience</div></div>
-      <div><div class="stat-num">5.0★</div><div class="stat-label">Google Rating</div></div>
-    </div>
-    <div class="cities-strip">
-      <span class="city-pill">London</span><span class="city-pill">Brampton</span><span class="city-pill">Mississauga</span><span class="city-pill">Kitchener</span><span class="city-pill">Cambridge</span><span class="city-pill">Guelph</span><span class="city-pill">Hamilton</span><span class="city-pill">Brantford</span><span class="city-pill">Woodstock</span><span class="city-pill">St. Thomas</span>
-    </div>
-  </div>
-  <div class="hero-right">
-    <div class="hero-img-grid">
-      <div class="hib" id="himg0" style="background:#2a2620">
-        <svg viewBox="0 0 100 100" fill="none"><rect x="10" y="50" width="80" height="40" rx="2" stroke="white" stroke-width="2"/><polygon points="10,50 50,15 90,50" fill="none" stroke="white" stroke-width="2"/></svg>
-        <div class="aupload" onclick="document.getElementById('hf0').click()"><input type="file" id="hf0" accept="image/*" style="display:none" onchange="setHeroImg(this,0)"/><p>+ Upload photo</p></div>
+<!-- ████  HORIZONTAL SCROLL  ████ -->
+<section id="horizontal-section">
+  <div id="horizontal-sticky">
+    <div id="horizontal-track">
+
+      <div class="h-card">
+        <div class="h-card-number">01</div>
+        <div class="h-card-content reveal">
+          <span class="h-card-label">Research Phase</span>
+          <h2 class="h-card-title">Archaeology of the Possible</h2>
+          <p class="h-card-desc">Every project begins with excavation — of site, of client, of the silence between stated intentions.</p>
+        </div>
+        <span class="h-card-index">01 / 04</span>
       </div>
-      <div class="hib" id="himg1" style="background:#1a1814">
-        <svg viewBox="0 0 100 100" fill="none"><rect x="20" y="20" width="60" height="60" rx="2" stroke="white" stroke-width="2"/><line x1="20" y1="45" x2="80" y2="45" stroke="white" stroke-width="1.5"/></svg>
-        <div class="aupload" onclick="document.getElementById('hf1').click()"><input type="file" id="hf1" accept="image/*" style="display:none" onchange="setHeroImg(this,1)"/><p>+ Upload photo</p></div>
+
+      <div class="h-card">
+        <div class="h-card-number">02</div>
+        <div class="h-card-content reveal">
+          <span class="h-card-label">Concept Development</span>
+          <h2 class="h-card-title">Language Before Form</h2>
+          <p class="h-card-desc">The concept is not a style. It is a system of constraints that generates unexpected freedoms.</p>
+        </div>
+        <span class="h-card-index">02 / 04</span>
       </div>
-    </div>
-    <div class="hero-badge">
-      <div class="badge-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-      <div><div class="badge-lbl">Licensed &amp; Insured</div><div class="badge-val">Renovation Experts</div></div>
-    </div>
-  </div>
-</section>
 
-<!-- COUNTERS -->
-<div class="counters"><div class="cg">
-  <div><div class="cnum counter" data-target="500">0</div><div class="clbl">Projects Completed</div></div>
-  <div><div class="cnum counter" data-target="10">0</div><div class="clbl">Cities Served</div></div>
-  <div><div class="cnum counter" data-target="20">0</div><div class="clbl">Years in Business</div></div>
-  <div><div class="cnum">5.0★</div><div class="clbl">Google Rating</div></div>
-</div></div>
-
-<!-- WHY US -->
-<section style="background:#fff">
-  <div class="stag">Why Choose Us</div><h2>The Expert Difference</h2>
-  <p class="ssub">We build trust, deliver quality, and create spaces you'll love for years.</p>
-  <div class="why-grid">
-    <div class="why-card"><div class="why-ico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="why-t">On Time, Every Time</div><p class="why-d">Projects completed on the agreed timeline — no excuses.</p></div>
-    <div class="why-card"><div class="why-ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="why-t">Licensed &amp; Fully Insured</div><p class="why-d">Full liability insurance. All work meets Ontario building code.</p></div>
-    <div class="why-card"><div class="why-ico"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div class="why-t">Transparent Pricing</div><p class="why-d">No hidden fees. Detailed itemized quote before we start.</p></div>
-    <div class="why-card"><div class="why-ico"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div class="why-t">Expert Tradespeople</div><p class="why-d">Skilled carpenters, tilers, plumbers who take pride in every detail.</p></div>
-    <div class="why-card"><div class="why-ico"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div><div class="why-t">Clean Jobsite Daily</div><p class="why-d">Tarps, dust barriers, and daily clean-up on every project.</p></div>
-    <div class="why-card"><div class="why-ico"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><div class="why-t">Satisfaction Guaranteed</div><p class="why-d">Final walkthrough and deficiency fixes included on every project.</p></div>
-  </div>
-  <div class="cert-row">
-    <div class="cert"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Ontario Licensed</div>
-    <div class="cert"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>WSIB Covered</div>
-    <div class="cert"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>$5M Liability Insurance</div>
-    <div class="cert"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>Google 5.0★</div>
-    <div class="cert"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>TikTok @ExpertRenovation</div>
-  </div>
-</section>
-
-<!-- SERVICES -->
-<section id="services" style="padding:5rem 4rem 2.5rem;background:var(--stone)">
-  <div class="stag">What We Do</div><h2>Our Services</h2>
-  <p class="ssub">Click any service for full details and a free AI estimate.</p>
-</section>
-<div style="padding:0 4rem 5rem;background:var(--stone)">
-  <div class="svc-grid">
-    <div class="svc-card" onclick="openSvc('kitchen')"><div class="svc-ico"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="svc-t">Kitchen Remodeling</div><p class="svc-d">From $15,000 · Custom cabinetry, countertops, backsplash &amp; full transformations.</p><div class="svc-more">View details →</div></div>
-    <div class="svc-card" onclick="openSvc('bathroom')"><div class="svc-ico"><svg viewBox="0 0 24 24"><path d="M4 12h16M4 12a2 2 0 0 1-2-2V6h20v4a2 2 0 0 1-2 2M6 12v6a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-6"/></svg></div><div class="svc-t">Bathroom Renovation</div><p class="svc-d">From $8,000 · Tile, vanities, showers — refresh to full rebuild.</p><div class="svc-more">View details →</div></div>
-    <div class="svc-card" onclick="openSvc('basement')"><div class="svc-ico"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><div class="svc-t">Basement Finishing</div><p class="svc-d">From $25,000 · Rec rooms, offices, gyms, rental suites done to code.</p><div class="svc-more">View details →</div></div>
-    <div class="svc-card" onclick="openSvc('addition')"><div class="svc-ico"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="svc-t">Home Additions</div><p class="svc-d">From $40,000 · Sunrooms, second storeys, garages &amp; more.</p><div class="svc-more">View details →</div></div>
-    <div class="svc-card" onclick="openSvc('flooring')"><div class="svc-ico"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8"/><rect x="13" y="3" width="8" height="8"/><rect x="3" y="13" width="8" height="8"/><rect x="13" y="13" width="8" height="8"/></svg></div><div class="svc-t">Flooring &amp; Tiling</div><p class="svc-d">From $3,000 · Hardwood, vinyl, laminate, ceramic &amp; porcelain tile.</p><div class="svc-more">View details →</div></div>
-    <div class="svc-card" onclick="openSvc('contracting')"><div class="svc-ico"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div><div class="svc-t">General Contracting</div><p class="svc-d">Full project management — permits, trades, timelines all handled.</p><div class="svc-more">View details →</div></div>
-  </div>
-</div>
-
-<!-- SERVICE MODALS -->
-<div class="smod-overlay" id="sm-kitchen" onclick="if(event.target===this)closeSvc('kitchen')"><div class="smod"><div class="smod-hdr"><div class="smod-t">Kitchen Remodeling</div><div class="smod-s">From $15,000 · Full transformations or minor updates</div><button class="smod-x" onclick="closeSvc('kitchen')">✕</button></div><div class="smod-body"><div class="pslot" id="ps-kitchen"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><p>No photo yet</p><div class="aslot-up" onclick="trigSlot('pf-kitchen')"><input type="file" id="pf-kitchen" accept="image/*" style="display:none" onchange="setSlot(this,'ps-kitchen')"/><span>+ Upload photo</span></div></div><p class="smod-txt">From layout planning to final installation — cabinets, countertops, backsplash, island design, lighting, plumbing and flooring, all in one project.</p><ul class="smod-feats"><li>Custom cabinet design</li><li>Countertop installation</li><li>Backsplash tile work</li><li>Kitchen island design</li><li>Lighting &amp; electrical</li><li>Plumbing fixtures</li><li>Flooring installation</li><li>Painting &amp; finishing</li></ul><button class="smod-cta" onclick="closeSvc('kitchen');openChat()">💬 Get a Free AI Estimate →</button></div></div></div>
-
-<div class="smod-overlay" id="sm-bathroom" onclick="if(event.target===this)closeSvc('bathroom')"><div class="smod"><div class="smod-hdr"><div class="smod-t">Bathroom Renovation</div><div class="smod-s">From $8,000 · Refresh to full rebuild</div><button class="smod-x" onclick="closeSvc('bathroom')">✕</button></div><div class="smod-body"><div class="pslot" id="ps-bathroom"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><p>No photo yet</p><div class="aslot-up" onclick="trigSlot('pf-bathroom')"><input type="file" id="pf-bathroom" accept="image/*" style="display:none" onchange="setSlot(this,'ps-bathroom')"/><span>+ Upload photo</span></div></div><p class="smod-txt">From a single fixture swap to a complete gut — all aspects handled with attention to waterproofing, tile work, and quality finishes.</p><ul class="smod-feats"><li>Full gut &amp; rebuild</li><li>Custom tile showers</li><li>Vanity &amp; mirror install</li><li>Soaker tubs</li><li>Heated floors</li><li>Plumbing rough-in</li><li>Lighting &amp; exhaust</li><li>Waterproofing</li></ul><button class="smod-cta" onclick="closeSvc('bathroom');openChat()">💬 Get a Free AI Estimate →</button></div></div></div>
-
-<div class="smod-overlay" id="sm-basement" onclick="if(event.target===this)closeSvc('basement')"><div class="smod"><div class="smod-hdr"><div class="smod-t">Basement Finishing</div><div class="smod-s">From $25,000 · Done to code with permits</div><button class="smod-x" onclick="closeSvc('basement')">✕</button></div><div class="smod-body"><div class="pslot" id="ps-basement"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><p>No photo yet</p><div class="aslot-up" onclick="trigSlot('pf-basement')"><input type="file" id="pf-basement" accept="image/*" style="display:none" onchange="setSlot(this,'ps-basement')"/><span>+ Upload photo</span></div></div><p class="smod-txt">We transform unfinished basements into beautiful livable spaces — rental units, home theatres, gyms, or extra bedrooms, all done to code.</p><ul class="smod-feats"><li>Framing &amp; insulation</li><li>Drywall &amp; painting</li><li>Permit coordination</li><li>Bathroom rough-in</li><li>Egress windows</li><li>Flooring</li><li>Electrical &amp; pot lights</li><li>Secondary suite</li></ul><button class="smod-cta" onclick="closeSvc('basement');openChat()">💬 Get a Free AI Estimate →</button></div></div></div>
-
-<div class="smod-overlay" id="sm-addition" onclick="if(event.target===this)closeSvc('addition')"><div class="smod"><div class="smod-hdr"><div class="smod-t">Home Additions</div><div class="smod-s">From $40,000 · Seamless expansions</div><button class="smod-x" onclick="closeSvc('addition')">✕</button></div><div class="smod-body"><div class="pslot" id="ps-addition"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><p>No photo yet</p><div class="aslot-up" onclick="trigSlot('pf-addition')"><input type="file" id="pf-addition" accept="image/*" style="display:none" onchange="setSlot(this,'ps-addition')"/><span>+ Upload photo</span></div></div><p class="smod-txt">Additions that blend seamlessly with your existing structure — from small bump-outs to full second storeys, all fully permitted.</p><ul class="smod-feats"><li>Garage &amp; carport</li><li>Sunroom / four-season</li><li>Second storey</li><li>Main floor expansion</li><li>Structural engineering</li><li>Permit drawings</li><li>Roofing &amp; siding match</li><li>Interior finishing</li></ul><button class="smod-cta" onclick="closeSvc('addition');openChat()">💬 Get a Free AI Estimate →</button></div></div></div>
-
-<div class="smod-overlay" id="sm-flooring" onclick="if(event.target===this)closeSvc('flooring')"><div class="smod"><div class="smod-hdr"><div class="smod-t">Flooring &amp; Tiling</div><div class="smod-s">From $3,000 · Supply &amp; install all floor types</div><button class="smod-x" onclick="closeSvc('flooring')">✕</button></div><div class="smod-body"><div class="pslot" id="ps-flooring"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><p>No photo yet</p><div class="aslot-up" onclick="trigSlot('pf-flooring')"><input type="file" id="pf-flooring" accept="image/*" style="display:none" onchange="setSlot(this,'ps-flooring')"/><span>+ Upload photo</span></div></div><p class="smod-txt">Precise, durable installations finished to a professional standard every time. We supply all materials or work with what you've chosen.</p><ul class="smod-feats"><li>Hardwood (solid &amp; engineered)</li><li>Laminate &amp; luxury vinyl</li><li>Ceramic &amp; porcelain tile</li><li>Natural stone</li><li>Heated floor systems</li><li>Subfloor repair</li><li>Stair nosing</li><li>Grout sealing</li></ul><button class="smod-cta" onclick="closeSvc('flooring');openChat()">💬 Get a Free AI Estimate →</button></div></div></div>
-
-<div class="smod-overlay" id="sm-contracting" onclick="if(event.target===this)closeSvc('contracting')"><div class="smod"><div class="smod-hdr"><div class="smod-t">General Contracting</div><div class="smod-s">Full project management start to finish</div><button class="smod-x" onclick="closeSvc('contracting')">✕</button></div><div class="smod-body"><div class="pslot" id="ps-contracting"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><p>No photo yet</p><div class="aslot-up" onclick="trigSlot('pf-contracting')"><input type="file" id="pf-contracting" accept="image/*" style="display:none" onchange="setSlot(this,'ps-contracting')"/><span>+ Upload photo</span></div></div><p class="smod-txt">One point of contact managing trades, permits, scheduling, and budget — so you can relax while we handle everything.</p><ul class="smod-feats"><li>Permit applications</li><li>Trade coordination</li><li>Detailed scheduling</li><li>Budget tracking</li><li>Daily supervision</li><li>Quality control</li><li>Deficiency management</li><li>Final inspection</li></ul><button class="smod-cta" onclick="closeSvc('contracting');openChat()">💬 Get a Free AI Estimate →</button></div></div></div>
-
-<!-- BEFORE / AFTER -->
-<section style="background:var(--stone)" id="beforeafter">
-  <div class="stag">Transformations</div><h2>Before &amp; After</h2>
-  <p class="ssub">Drag the slider to reveal the transformation.</p>
-  <div class="ba-wrap" id="baWrap">
-    <div class="ba-before" id="baBefore"><div class="ba-txt">Before</div><div class="ba-lbl">BEFORE</div></div>
-    <div class="ba-clip" id="baClip" style="clip-path:inset(0 50% 0 0)">
-      <div class="ba-after" id="baAfter"><div class="ba-txt">After</div><div class="ba-lbl">AFTER</div></div>
-    </div>
-    <div class="ba-div" id="baDiv" style="left:50%"><div class="ba-handle"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/><polyline points="9 6 15 12 9 18" transform="translate(6,0)"/></svg></div></div>
-  </div>
-  <div class="aba-row">
-    <label class="aba-btn">📷 Upload Before Photo<input type="file" accept="image/*" style="display:none" onchange="setBAPhoto(this,'before')"/></label>
-    <label class="aba-btn">✨ Upload After Photo<input type="file" accept="image/*" style="display:none" onchange="setBAPhoto(this,'after')"/></label>
-  </div>
-</section>
-
-<!-- GALLERY -->
-<section style="background:#fff" id="gallery">
-  <div class="stag">Our Work</div><h2>Project Gallery</h2>
-  <p class="ssub" id="galSub">Browse our completed renovation projects.</p>
-  <div class="gal-grid">
-    <div class="gal-slot" id="gs0"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><p>Photo coming soon</p><div class="agallery-up" onclick="document.getElementById('gf0').click()"><input type="file" id="gf0" accept="image/*" style="display:none" onchange="addGPhoto(this,0)"/><span>+ Add photo</span></div><button class="gal-rm" onclick="rmGPhoto(0)">✕</button></div>
-    <div class="gal-slot" id="gs1"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><p>Photo coming soon</p><div class="agallery-up" onclick="document.getElementById('gf1').click()"><input type="file" id="gf1" accept="image/*" style="display:none" onchange="addGPhoto(this,1)"/><span>+ Add photo</span></div><button class="gal-rm" onclick="rmGPhoto(1)">✕</button></div>
-    <div class="gal-slot" id="gs2"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><p>Photo coming soon</p><div class="agallery-up" onclick="document.getElementById('gf2').click()"><input type="file" id="gf2" accept="image/*" style="display:none" onchange="addGPhoto(this,2)"/><span>+ Add photo</span></div><button class="gal-rm" onclick="rmGPhoto(2)">✕</button></div>
-    <div class="gal-slot" id="gs3"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><p>Photo coming soon</p><div class="agallery-up" onclick="document.getElementById('gf3').click()"><input type="file" id="gf3" accept="image/*" style="display:none" onchange="addGPhoto(this,3)"/><span>+ Add photo</span></div><button class="gal-rm" onclick="rmGPhoto(3)">✕</button></div>
-    <div class="gal-slot" id="gs4"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><p>Photo coming soon</p><div class="agallery-up" onclick="document.getElementById('gf4').click()"><input type="file" id="gf4" accept="image/*" style="display:none" onchange="addGPhoto(this,4)"/><span>+ Add photo</span></div><button class="gal-rm" onclick="rmGPhoto(4)">✕</button></div>
-    <div class="gal-slot" id="gs5"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><p>Photo coming soon</p><div class="agallery-up" onclick="document.getElementById('gf5').click()"><input type="file" id="gf5" accept="image/*" style="display:none" onchange="addGPhoto(this,5)"/><span>+ Add photo</span></div><button class="gal-rm" onclick="rmGPhoto(5)">✕</button></div>
-  </div>
-</section>
-
-<!-- VIDEOS -->
-<section class="vid-sec" id="videos">
-  <div class="stag">Watch Our Work</div><h2>Videos &amp; TikToks</h2>
-  <p class="ssub">Watch our renovation transformations.</p>
-  <div class="vid-grid">
-    <div><div class="vid-slot" id="vs0"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg><p>Video coming soon</p></div><div class="avid-row"><input class="vid-url-in" id="vu0" type="text" placeholder="Paste YouTube or TikTok URL..."/><button class="vid-emb-btn" onclick="embedVid(0)">Embed</button></div></div>
-    <div><div class="vid-slot" id="vs1"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg><p>Video coming soon</p></div><div class="avid-row"><input class="vid-url-in" id="vu1" type="text" placeholder="Paste YouTube or TikTok URL..."/><button class="vid-emb-btn" onclick="embedVid(1)">Embed</button></div></div>
-  </div>
-</section>
-
-<!-- PROCESS -->
-<section class="proc-sec" id="process">
-  <div class="stag">How It Works</div><h2>Our Simple Process</h2>
-  <p class="ssub">Renovation made completely stress-free — from first call to final walkthrough.</p>
-  <div class="proc-steps">
-    <div class="proc-step"><div class="step-num">01</div><div class="step-t">Free Consultation</div><p class="step-d">We visit your home, understand your vision, and answer every question — at no charge.</p></div>
-    <div class="proc-step"><div class="step-num">02</div><div class="step-t">Design &amp; Quote</div><p class="step-d">Detailed plan and fully itemized quote — no surprises, no hidden fees.</p></div>
-    <div class="proc-step"><div class="step-num">03</div><div class="step-t">We Build</div><p class="step-d">Skilled crew on-site with regular updates and a direct line to your project lead.</p></div>
-    <div class="proc-step"><div class="step-num">04</div><div class="step-t">Final Walkthrough</div><p class="step-d">We walk through together, fix anything, and ensure 100% satisfaction.</p></div>
-  </div>
-</section>
-
-<!-- FINANCING -->
-<section id="financing" style="background:#fff">
-  <div class="stag">Payment Options</div><h2>Flexible Financing</h2>
-  <p class="ssub">We make your dream renovation affordable. Choose what works for you.</p>
-  <div class="fin-grid">
-    <div class="fin-card"><div class="fin-lbl">Option 1</div><div class="fin-t">Pay As You Go</div><div class="fin-d">Milestone payments tied to project phases — no interest.</div><ul class="fin-feats"><li>Deposit to start</li><li>Progress payments</li><li>Final on completion</li><li>No interest</li></ul><button class="fin-btn" onclick="scrollTo('quote')">Get a Quote</button></div>
-    <div class="fin-card feat"><div class="fin-lbl">Most Popular</div><div class="fin-t">0% Financing</div><div class="fin-d">Spread cost over 12–24 months with zero interest. Subject to approval.</div><ul class="fin-feats"><li>0% interest 12 months</li><li>Low monthly payments</li><li>Quick approval</li><li>No hidden fees</li></ul><button class="fin-btn" onclick="scrollTo('quote')">Apply Now</button></div>
-    <div class="fin-card"><div class="fin-lbl">Option 3</div><div class="fin-t">Custom Plan</div><div class="fin-d">Tailored schedules for larger projects over $50K.</div><ul class="fin-feats"><li>Flexible terms</li><li>Structured milestones</li><li>Any budget</li><li>Personal consultation</li></ul><button class="fin-btn" onclick="scrollTo('quote')">Let's Talk</button></div>
-  </div>
-</section>
-
-<!-- REVIEWS -->
-<section class="rev-sec" id="reviews">
-  <div class="stag">Client Reviews</div><h2>What Our Clients Say</h2>
-  <div class="rat-sum">
-    <div><div class="rat-big">5.0</div><div class="stars" style="margin-top:8px;margin-bottom:4px"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div><div style="font-size:.75rem;color:var(--ink-light)">8 reviews · Google</div></div>
-    <div style="flex:1;border-left:1px solid var(--stone-dark);padding-left:2rem"><p style="font-size:.9rem;color:var(--ink-mid);line-height:1.75;font-style:italic">"Our team specializes in transforming outdated kitchens into beautiful, functional spaces — from custom cabinetry to stunning countertops."</p><p style="font-size:.75rem;color:var(--ink-light);margin-top:8px">— Expert Renovation</p></div>
-  </div>
-  <div class="rev-grid">
-    <div class="rev-card"><div class="gbadge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Google</div><div class="stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div><p class="rev-txt">"Expert Renovation did an incredible job on our kitchen. Top-notch craftsmanship, finished ahead of schedule. The result is beyond what we imagined."</p><div class="rev-auth"><div class="rev-av">AK</div><div><div class="rev-name">A. Kumar</div><div class="rev-loc">London, ON</div></div></div></div>
-    <div class="rev-card"><div class="gbadge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Google</div><div class="stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div><p class="rev-txt">"Had our bathroom completely redone — couldn't be happier. Communicative throughout, cleaned up every day, and delivered a beautiful result."</p><div class="rev-auth"><div class="rev-av">SP</div><div><div class="rev-name">S. Patel</div><div class="rev-loc">Brampton, ON</div></div></div></div>
-    <div class="rev-card"><div class="gbadge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Google</div><div class="stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div><p class="rev-txt">"Basement looks absolutely amazing. Great attention to detail, very fairly priced. A pleasure to work with start to finish."</p><div class="rev-auth"><div class="rev-av">MR</div><div><div class="rev-name">M. Rodriguez</div><div class="rev-loc">Mississauga, ON</div></div></div></div>
-    <div class="rev-card"><div class="gbadge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Google</div><div class="stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div><p class="rev-txt">"Full kitchen remodel — cabinets, counters, backsplash, flooring. Everything perfect. Professional, on time, and spotless."</p><div class="rev-auth"><div class="rev-av">JL</div><div><div class="rev-name">J. Li</div><div class="rev-loc">Kitchener, ON</div></div></div></div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section id="faq" style="background:#fff">
-  <div class="stag">Common Questions</div><h2>Frequently Asked Questions</h2>
-  <div class="faq-list">
-    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How much does a kitchen renovation cost? <span class="faq-ico">+</span></button><div class="faq-a">Kitchen renovations in Ontario typically range from $15,000 for a refresh to $60,000+ for a full custom build. Use our free AI estimator (chat button) for a rough estimate based on your specific project.</div></div>
-    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How long does a renovation take? <span class="faq-ico">+</span></button><div class="faq-a">Bathroom: 1–2 weeks. Kitchen: 3–5 weeks. Basement: 4–8 weeks. Home addition: varies. We provide a specific schedule before starting and stick to it.</div></div>
-    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Do you handle permits? <span class="faq-ico">+</span></button><div class="faq-a">Yes — we handle all permit applications and coordinate with the city on your behalf. All work meets Ontario Building Code requirements.</div></div>
-    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Do I need to move out during the renovation? <span class="faq-ico">+</span></button><div class="faq-a">For most projects, no. We use dust barriers, floor protection, and daily clean-up. For very large whole-home renovations we'll advise if temporary relocation makes sense.</div></div>
-    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What areas do you serve? <span class="faq-ico">+</span></button><div class="faq-a">We serve London, Brampton, Mississauga, Kitchener, Cambridge, Guelph, Hamilton, Brantford, Woodstock, St. Thomas, and surrounding areas. Call (437) 995-0633 to confirm your area.</div></div>
-    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is your work guaranteed? <span class="faq-ico">+</span></button><div class="faq-a">Absolutely. All work comes with a full workmanship warranty. We do a thorough final walkthrough and fix any deficiencies before considering a job complete.</div></div>
-    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Do you offer financing? <span class="faq-ico">+</span></button><div class="faq-a">Yes! We offer 0% financing for 12–24 months, milestone-based payment plans, and custom arrangements for larger projects. Ask about financing when you request your free quote.</div></div>
-  </div>
-</section>
-
-<!-- QUOTE FORM -->
-<section class="quote-sec" id="quote" style="padding:5rem 4rem">
-  <div class="q-inner">
-    <div>
-      <div class="stag">Get Started</div><h2>Get Your Free Quote</h2>
-      <p style="font-size:.93rem;color:var(--ink-light);margin-bottom:1.5rem">Fill out the form and we'll be in touch within one business day for a free in-home consultation.</p>
-      <div class="clist">
-        <div class="citem"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.6a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 3h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 17.92z"/></svg>(437) 995-0633</div>
-        <div class="citem"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>London, ON &amp; Nearby Cities</div>
-        <div class="citem"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Opens 8 a.m. Saturday</div>
-        <div class="citem"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>TikTok: @ExpertRenovation</div>
+      <div class="h-card">
+        <div class="h-card-number">03</div>
+        <div class="h-card-content reveal">
+          <span class="h-card-label">Material Study</span>
+          <h2 class="h-card-title">Texture as Argument</h2>
+          <p class="h-card-desc">Raw travertine against blackened steel. Each material selection is a position, not a preference.</p>
+        </div>
+        <span class="h-card-index">03 / 04</span>
       </div>
+
+      <div class="h-card">
+        <div class="h-card-number">04</div>
+        <div class="h-card-content reveal">
+          <span class="h-card-label">Execution</span>
+          <h2 class="h-card-title">Precision as Craft</h2>
+          <p class="h-card-desc">The detail that will never be photographed matters most. That is where the work lives.</p>
+        </div>
+        <span class="h-card-index">04 / 04</span>
+      </div>
+
     </div>
-    <div class="qform">
-      <h3>Request a Free Quote</h3>
-      <form name="quote-request" method="POST" action="https://formspree.io/f/mvzvkjqy" onsubmit="handleFormSubmit(event)">
-        <!-- Formspree: replace YOUR_FORM_ID above with your free Formspree form ID -->
-        <p style="display:none"><input name="bot-field"/></p>
-        <div class="fg">
-          <input class="fi" type="text" name="first-name" placeholder="First name" required/>
-          <input class="fi" type="text" name="last-name" placeholder="Last name"/>
-        </div>
-        <div class="fg">
-          <input class="fi" type="email" name="email" placeholder="Email address"/>
-          <input class="fi" type="tel" name="phone" placeholder="Phone number" required/>
-        </div>
-        <div class="ff"><input class="fi" type="text" name="city" placeholder="Your city"/></div>
-        <div class="ff">
-          <select class="fi" name="project-type" style="cursor:pointer" required>
-            <option value="" disabled selected>Type of project</option>
-            <option>Kitchen Remodeling</option>
-            <option>Bathroom Renovation</option>
-            <option>Basement Finishing</option>
-            <option>Home Addition</option>
-            <option>Flooring &amp; Tiling</option>
-            <option>General Contracting</option>
-            <option>Other</option>
-          </select>
-        </div>
-        <div class="ff">
-          <select class="fi" name="budget" style="cursor:pointer">
-            <option value="" disabled selected>Estimated budget</option>
-            <option>Under $10,000</option>
-            <option>$10,000 – $25,000</option>
-            <option>$25,000 – $50,000</option>
-            <option>$50,000 – $100,000</option>
-            <option>$100,000+</option>
-            <option>Not sure yet</option>
-          </select>
-        </div>
-        <div class="ff"><textarea class="fi" name="message" placeholder="Tell us about your project..."></textarea></div>
-        <button class="fsub" type="submit">Send My Quote Request →</button>
-        <div class="fsuccess" id="fsuccess">✓ Thanks! We’ll be in touch within one business day to book your free consultation.</div>
-      </form>
+
+    <div class="h-progress" id="h-progress">
+      <div class="h-progress-dot active"></div>
+      <div class="h-progress-dot"></div>
+      <div class="h-progress-dot"></div>
+      <div class="h-progress-dot"></div>
     </div>
   </div>
 </section>
 
+<!-- ████  SPLIT FEATURE  ████ -->
+<section id="split-feature">
+  <div class="split-image">
+    <div class="split-image-inner" id="parallax-image"></div>
+    <span class="split-image-label">Studio — Tokyo / Oslo</span>
+  </div>
+  <div class="split-text reveal">
+    <span class="split-label">Selected Work — 2024</span>
+    <h2 class="split-heading">The House That Knew<br>What It Was</h2>
+    <p class="split-body">
+      A private residence in the mountains north of Oslo. The brief was simple: a place to think.
+      The solution was more difficult — the elimination of everything that prevents it.
+    </p>
+    <a href="#" class="text-link">View Project &nbsp;&nbsp;→</a>
+  </div>
+</section>
+
+<!-- ████  MARQUEE  ████ -->
+<section id="marquee-section">
+  <div class="marquee-track" id="marquee-track">
+    <span class="marquee-item">Architecture</span>
+    <span class="marquee-item gold">/</span>
+    <span class="marquee-item">Interior Design</span>
+    <span class="marquee-item gold">/</span>
+    <span class="marquee-item">Visual Identity</span>
+    <span class="marquee-item gold">/</span>
+    <span class="marquee-item">Art Direction</span>
+    <span class="marquee-item gold">/</span>
+    <span class="marquee-item">Spatial Concept</span>
+    <span class="marquee-item gold">/</span>
+    <span class="marquee-item">Architecture</span>
+    <span class="marquee-item gold">/</span>
+    <span class="marquee-item">Interior Design</span>
+    <span class="marquee-item gold">/</span>
+    <span class="marquee-item">Visual Identity</span>
+    <span class="marquee-item gold">/</span>
+    <span class="marquee-item">Art Direction</span>
+    <span class="marquee-item gold">/</span>
+    <span class="marquee-item">Spatial Concept</span>
+    <span class="marquee-item gold">/</span>
+  </div>
+</section>
+
+<!-- ████  CONTENT BLOCK  ████ -->
+<section id="content-block">
+  <div class="reveal">
+    <span class="content-col-label">Discipline</span>
+    <h3 class="content-col-heading">Architecture &amp; Interior</h3>
+    <p class="content-col-body">
+      From concept to completion, we move across scales — from the urban master plan to the placement of a single door handle.
+    </p>
+  </div>
+  <div class="reveal" style="transition-delay:0.15s">
+    <span class="content-col-label">Approach</span>
+    <h3 class="content-col-heading">Reduction as Method</h3>
+    <p class="content-col-body">
+      We believe the best work arrives through subtraction. Every unnecessary element removed is a decision made visible.
+    </p>
+  </div>
+  <div class="reveal" style="transition-delay:0.3s">
+    <span class="content-col-label">Geography</span>
+    <h3 class="content-col-heading">Tokyo, Oslo, São Paulo</h3>
+    <p class="content-col-body">
+      Three studios. Three climates. One consistent refusal to accept the obvious as inevitable.
+    </p>
+  </div>
+</section>
+
+<!-- ████  FOOTER  ████ -->
 <footer>
-  <a href="#" class="flogo">Expert <span style="color:#D4B483">Renovation</span></a>
-  <div style="text-align:center;font-size:.78rem">© 2026 Expert Renovation · London, Ontario</div>
-  <div style="text-align:right;font-size:.78rem">(437) 995-0633 · Opens 8 a.m. Sat</div>
+  <div class="footer-divider"></div>
+  <div class="footer-left">
+    <span class="footer-name">Atelier</span>
+    &copy; 2024 — All rights reserved
+  </div>
+  <ul class="footer-nav">
+    <li><a href="#hero">Work</a></li>
+    <li><a href="#split-feature">Studio</a></li>
+    <li><a href="#marquee-section">Process</a></li>
+    <li><a href="#content-block">About</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <div class="footer-right">
+    <a href="#">@atelier.studio</a>
+    <span>Instagram &nbsp;/&nbsp; <a href="#">LinkedIn</a></span>
+    <span style="font-size:9px; letter-spacing:0.12em">hello@atelier.studio</span>
+  </div>
 </footer>
 
-<!-- AI CHAT FAB -->
-<button class="chat-fab" onclick="toggleChat()">
-  <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-  <div class="chat-dot"></div>
-</button>
-
-<!-- AI CHAT WINDOW -->
-<div class="chat-win" id="chatWin">
-  <div class="chat-hdr">
-    <div class="chat-av"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
-    <div class="chat-inf"><div class="chat-name">Expert Renovation AI</div><div class="chat-status">Online — Free estimates available</div></div>
-    <button class="chat-xcl" onclick="toggleChat()">✕</button>
-  </div>
-  <div class="chat-msgs" id="chatMsgs"></div>
-  <div class="chat-quick" id="chatQuick">
-    <button class="cqb" onclick="quickAsk('I want a price estimate')">💰 Get estimate</button>
-    <button class="cqb" onclick="quickAsk('What services do you offer?')">🔨 Services</button>
-    <button class="cqb" onclick="quickAsk('How long does a renovation take?')">⏱️ Timeline</button>
-    <button class="cqb" onclick="quickAsk('Do you offer financing?')">💳 Financing</button>
-  </div>
-  <div class="chat-in-row">
-    <input class="chat-in" id="chatIn" type="text" placeholder="Ask anything..." onkeydown="if(event.key==='Enter')sendChat()"/>
-    <button class="chat-send" onclick="sendChat()"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
-  </div>
-</div>
-
 <script>
-// ═══════════════════════════════════════
-// STATE
-// ═══════════════════════════════════════
-var ADMIN_PASS = 'expert2026';
-var isAdmin = false;
-var chatOpen = false;
-var cs = { stage:'greeting', name:'', phone:'', email:'', project:'', size:'', estimate:'' };
-
-// ── PERSISTENT STORAGE ──
-function lsGet(key){ try{ return JSON.parse(localStorage.getItem('er_'+key)||'null') }catch(e){return null} }
-function lsSet(key,val){ try{ localStorage.setItem('er_'+key, JSON.stringify(val)) }catch(e){} }
-var leads = lsGet('leads') || [];
-function saveLeads(){ lsSet('leads', leads) }
-
-window.addEventListener('DOMContentLoaded', function(){
-  // Restore hero images
-  [0,1].forEach(function(i){
-    var src = lsGet('hero_'+i); if(!src) return;
-    var el = document.getElementById('himg'+i);
-    el.style.backgroundImage='url('+src+')'; el.style.backgroundSize='cover'; el.style.backgroundPosition='center';
-    el.querySelectorAll('svg').forEach(function(s){ s.style.display='none' });
-    var up=el.querySelector('.aupload'); if(up) up.querySelector('p').textContent='Change photo';
+/* ─────────────────────────────────────────────
+   PAGE LOAD OVERLAY
+───────────────────────────────────────────── */
+window.addEventListener('load', () => {
+  const overlay = document.getElementById('page-overlay');
+  requestAnimationFrame(() => {
+    setTimeout(() => overlay.classList.add('hidden'), 60);
   });
-  // Restore gallery
-  [0,1,2,3,4,5].forEach(function(i){
-    var src = lsGet('gallery_'+i); if(!src) return;
-    var slot = document.getElementById('gs'+i); if(!slot) return;
-    slot.querySelectorAll('svg,p,.agallery-up').forEach(function(e){ e.style.display='none' });
-    var img=document.createElement('img'); img.src=src;
-    img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2';
-    slot.appendChild(img);
-  });
-  // Restore service photos
-  ['kitchen','bathroom','basement','addition','flooring','contracting'].forEach(function(name){
-    var src = lsGet('slot_'+name); if(!src) return;
-    var slot = document.getElementById('ps-'+name); if(!slot) return;
-    slot.querySelectorAll('svg,p,.aslot-up').forEach(function(e){ e.style.display='none' });
-    var img=document.createElement('img'); img.src=src;
-    img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2';
-    slot.appendChild(img);
-  });
-  // Restore before/after
-  var bs=lsGet('ba_before');
-  if(bs){ var bb=document.getElementById('baBefore'); bb.style.backgroundImage='url('+bs+')'; bb.style.backgroundSize='cover'; bb.style.backgroundPosition='center'; var t=bb.querySelector('.ba-txt'); if(t)t.style.display='none'; }
-  var as=lsGet('ba_after');
-  if(as){ var ba=document.getElementById('baAfter'); ba.style.backgroundImage='url('+as+')'; ba.style.backgroundSize='cover'; ba.style.backgroundPosition='center'; var t2=ba.querySelector('.ba-txt'); if(t2)t2.style.display='none'; }
-  // Restore videos
-  [0,1].forEach(function(i){
-    var eu=lsGet('video_'+i);
-    if(eu) document.getElementById('vs'+i).innerHTML='<iframe src="'+eu+'" allowfullscreen allow="autoplay"></iframe>';
-  });
+  setTimeout(() => {
+    document.querySelectorAll('.hero-line').forEach(el => el.classList.add('visible'));
+    document.querySelector('.hero-eyebrow').classList.add('visible');
+    document.querySelector('.hero-subtitle').classList.add('visible');
+    document.querySelector('.scroll-cue').classList.add('visible');
+  }, 400);
 });
 
-var PRICING = {
-  kitchen:    { min:15000, max:60000,  label:'Kitchen Remodeling' },
-  bathroom:   { min:8000,  max:30000,  label:'Bathroom Renovation' },
-  basement:   { min:25000, max:60000,  label:'Basement Finishing' },
-  addition:   { min:40000, max:120000, label:'Home Addition' },
-  flooring:   { min:3000,  max:15000,  label:'Flooring & Tiling' },
-  contracting:{ min:10000, max:200000, label:'General Contracting' }
-};
-var SIZE_MULT = { small:0.7, medium:1.0, large:1.4, 'extra large':1.8 };
+/* ─────────────────────────────────────────────
+   CURSOR — LERP
+───────────────────────────────────────────── */
+const cursorDot  = document.getElementById('cursor-dot');
+const cursorRing = document.getElementById('cursor-ring');
 
-// ═══════════════════════════════════════
-// HELPERS
-// ═══════════════════════════════════════
-function scrollTo(id){ document.getElementById(id).scrollIntoView({behavior:'smooth'}) }
-function fmt(n){ return '$'+n.toLocaleString() }
-function calcEstimate(proj, sz){
-  var p = PRICING[proj]; if(!p) return null;
-  var m = SIZE_MULT[sz] || 1.0;
-  return fmt(Math.round(p.min*m/500)*500) + ' – ' + fmt(Math.round(p.max*m/1000)*1000);
-}
-function detectProject(msg){
-  var m = msg.toLowerCase();
-  if(m.includes('kitchen')||m.includes('cabinet')||m.includes('counter')) return 'kitchen';
-  if(m.includes('bathroom')||m.includes('bath')||m.includes('shower')||m.includes('toilet')) return 'bathroom';
-  if(m.includes('basement')||m.includes('lower level')) return 'basement';
-  if(m.includes('addition')||m.includes('sunroom')||m.includes('garage')||m.includes('storey')) return 'addition';
-  if(m.includes('floor')||m.includes('tile')||m.includes('hardwood')||m.includes('laminate')) return 'flooring';
-  if(m.includes('contract')||m.includes('general')) return 'contracting';
-  return null;
-}
-function detectSize(msg){
-  var m = msg.toLowerCase();
-  if(m.includes('small')||m.includes('tiny')||m.includes('little')) return 'small';
-  if(m.includes('extra large')||m.includes('very large')) return 'extra large';
-  if(m.includes('large')||m.includes('big')||m.includes('huge')) return 'large';
-  if(m.includes('medium')||m.includes('average')||m.includes('typical')) return 'medium';
-  return null;
-}
+let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+let rx = mx, ry = my;
 
-// ═══════════════════════════════════════
-// ADMIN
-// ═══════════════════════════════════════
-function openLogin(){ document.getElementById('loginModal').classList.add('on'); setTimeout(function(){document.getElementById('loginPass').focus()},100) }
-function closeLogin(){ document.getElementById('loginModal').classList.remove('on'); document.getElementById('loginPass').value=''; document.getElementById('loginErr').classList.remove('on') }
-function doLogin(){
-  if(document.getElementById('loginPass').value === ADMIN_PASS){
-    isAdmin = true; closeLogin();
-    document.getElementById('adminBar').classList.add('on');
-    document.getElementById('adminNavBtn').textContent = '✓ Admin';
-    document.getElementById('adminNavBtn').style.cssText = 'border-color:var(--gold);color:var(--gold)';
-    document.getElementById('galSub').textContent = 'Click any slot below to upload your project photos (admin only).';
-    document.body.classList.add('admin');
-    // Add a sample lead if leads list is empty so panel is never blank on first test
-    if(leads.length === 0){
-      leads.push({name:'Sample Customer (Test)',phone:'(555) 123-4567',email:'sample@email.com',project:'Kitchen Remodeling (medium)',size:'medium',estimate:'$15,000 – $60,000',time:'Sample lead — real leads appear here when customers use the AI chat or quote form'});
-    }
-  } else {
-    document.getElementById('loginErr').classList.add('on');
-    document.getElementById('loginPass').value='';
-    document.getElementById('loginPass').focus();
-  }
-}
-function doLogout(){
-  isAdmin = false;
-  document.getElementById('adminBar').classList.remove('on');
-  document.getElementById('adminNavBtn').textContent = '🔒 Admin';
-  document.getElementById('adminNavBtn').removeAttribute('style');
-  document.getElementById('galSub').textContent = 'Browse our completed renovation projects.';
-  document.body.classList.remove('admin');
-}
-
-// ═══════════════════════════════════════
-// LEADS
-// ═══════════════════════════════════════
-function saveLead(d){ leads.push(Object.assign({time: new Date().toLocaleString()}, d)); saveLeads(); }
-function openLeads(){
-  if(!isAdmin) return;
-  var b = document.getElementById('leadsBody');
-  b.innerHTML = '';
-  if(!leads.length){
-    b.innerHTML='<div class="leads-empty">No leads yet. When customers use the AI estimator or quote form and share their details, they\'ll appear here.</div>';
-  } else {
-    leads.slice().reverse().forEach(function(l){
-      var card = document.createElement('div');
-      card.className = 'lead-card';
-      card.innerHTML =
-        '<div class="lead-name">' + (l.name||'Unknown') + '</div>' +
-        '<div class="lead-meta">' +
-          '<span>📞 ' + (l.phone||'—') + '</span>' +
-          (l.email ? '<span>✉ ' + l.email + '</span>' : '') +
-        '</div>' +
-        '<div class="lead-proj">' + (l.project||'—') + (l.size ? ' · ' + l.size : '') + '</div>' +
-        (l.estimate ? '<div class="lead-est">Estimate: ' + l.estimate + '</div>' : '') +
-        '<div class="lead-time">' + (l.time||'') + '</div>';
-      b.appendChild(card);
-    });
-  }
-  document.getElementById('leadsPanel').classList.add('on');
-}
-function closeLeads(){ document.getElementById('leadsPanel').classList.remove('on') }
-
-// ═══════════════════════════════════════
-// NAV
-// ═══════════════════════════════════════
-function toggleMenu(){ document.getElementById('mobMenu').classList.toggle('open') }
-function closeMenu(){ document.getElementById('mobMenu').classList.remove('open') }
-
-// ═══════════════════════════════════════
-// COUNTERS
-// ═══════════════════════════════════════
-var countersDone = false;
-window.addEventListener('scroll', function(){
-  if(!countersDone && window.scrollY > 150){
-    countersDone = true;
-    document.querySelectorAll('.counter').forEach(function(el){
-      var target = parseInt(el.getAttribute('data-target')), dur = 1800, step = target/dur*16, cur = 0;
-      var t = setInterval(function(){ cur+=step; if(cur>=target){cur=target;clearInterval(t)} el.textContent=Math.floor(cur)+(target>=100?'+':'') },16);
-    });
-  }
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursorDot.style.left = mx + 'px';
+  cursorDot.style.top  = my + 'px';
 });
 
-// ═══════════════════════════════════════
-// SERVICE MODALS
-// ═══════════════════════════════════════
-function openSvc(id){ document.getElementById('sm-'+id).classList.add('on'); document.body.style.overflow='hidden' }
-function closeSvc(id){ document.getElementById('sm-'+id).classList.remove('on'); document.body.style.overflow='' }
-document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ document.querySelectorAll('.smod-overlay.on').forEach(function(m){ m.classList.remove('on') }); document.body.style.overflow='' } });
+(function loop() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  cursorRing.style.left = rx + 'px';
+  cursorRing.style.top  = ry + 'px';
+  requestAnimationFrame(loop);
+})();
 
-// ═══════════════════════════════════════
-// PHOTO UPLOADS (admin only)
-// ═══════════════════════════════════════
-function trigSlot(id){ if(!isAdmin) return; document.getElementById(id).click() }
-// imgBB API key — get your free key at imgbb.com (free, no credit card)
-var IMGBB_KEY = 'fae610333689577b5245db739b1e1391';
+/* ─────────────────────────────────────────────
+   INTERSECTION OBSERVER — REVEAL
+───────────────────────────────────────────── */
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in-view'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-function uploadToImgBB(file, callback){
-  // Try imgBB cloud upload first (works across all devices)
-  if(IMGBB_KEY && IMGBB_KEY !== 'YOUR_IMGBB_API_KEY'){
-    var fd = new FormData();
-    fd.append('image', file);
-    fd.append('key', IMGBB_KEY);
-    fetch('https://api.imgbb.com/1/upload', {method:'POST', body:fd})
-      .then(function(r){ return r.json() })
-      .then(function(d){
-        if(d.success){ callback(d.data.url, true); }
-        else { fallbackLocalRead(file, callback); }
-      })
-      .catch(function(){ fallbackLocalRead(file, callback); });
-  } else {
-    fallbackLocalRead(file, callback);
-  }
-}
-function fallbackLocalRead(file, callback){
-  var r = new FileReader();
-  r.onload = function(e){ callback(e.target.result, false); };
-  r.readAsDataURL(file);
-}
-function applyPhotoToSlot(src, slotId, isCloud){
-  var slot = document.getElementById(slotId);
-  var ex = slot.querySelector('img'); if(ex) ex.remove();
-  var img = document.createElement('img');
-  img.src = src;
-  img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2';
-  slot.appendChild(img);
-  slot.querySelectorAll('svg,p,.aslot-up').forEach(function(el){ el.style.display='none' });
-  var chg = slot.querySelector('.slot-change');
-  if(!chg){
-    chg = document.createElement('button');
-    chg.className='slot-change';
-    chg.textContent='Change photo';
-    chg.style.cssText='position:absolute;bottom:.5rem;right:.5rem;z-index:10;background:rgba(0,0,0,.6);color:#fff;border:none;padding:.25rem .6rem;border-radius:4px;font-size:.72rem;cursor:pointer';
-    slot.appendChild(chg);
-  }
-  chg.style.display='block';
-  chg.onclick=function(ev){
-    ev.stopPropagation();
-    var inp = slot.querySelector('input[type=file]'); if(inp) inp.click();
-  };
-  var name = slotId.replace('ps-','');
-  lsSet('slot_'+name, src);
-  if(isCloud) lsSet('slot_'+name+'_cloud', src);
-}
-function setSlot(input, slotId){
-  if(!input.files||!input.files[0]||!isAdmin) return;
-  var loadingTxt = slotId.replace('ps-','');
-  var slot = document.getElementById(slotId);
-  slot.querySelectorAll('p').forEach(function(el){ el.textContent='Uploading...'; });
-  uploadToImgBB(input.files[0], function(src, isCloud){
-    applyPhotoToSlot(src, slotId, isCloud);
-  });
-}
-function setHeroImg(input, i){
-  if(!input.files||!input.files[0]||!isAdmin) return;
-  var el = document.getElementById('himg'+i);
-  el.querySelectorAll('svg').forEach(function(s){ s.style.opacity='.05' });
-  uploadToImgBB(input.files[0], function(src, isCloud){
-    el.style.backgroundImage = 'url('+src+')';
-    el.style.backgroundSize = 'cover'; el.style.backgroundPosition = 'center';
-    el.querySelectorAll('svg').forEach(function(s){ s.style.display='none' });
-    var up = el.querySelector('.aupload');
-    if(up){ up.querySelector('p').textContent='Change photo'; }
-    lsSet('hero_'+i, src);
-  });
-}
-function addGPhoto(input, i){
-  if(!input.files||!input.files[0]||!isAdmin) return;
-  var slot = document.getElementById('gs'+i);
-  slot.querySelectorAll('p').forEach(function(el){ el.textContent='Uploading...' });
-  uploadToImgBB(input.files[0], function(src, isCloud){
-    var ex = slot.querySelector('img'); if(ex) ex.remove();
-    var img = document.createElement('img');
-    img.src = src;
-    img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2';
-    slot.appendChild(img);
-    slot.querySelectorAll('svg,p,.agallery-up').forEach(function(el){ el.style.display='none' });
-    lsSet('gallery_'+i, src);
-  });
-}
-function rmGPhoto(i){
-  if(!isAdmin) return;
-  var slot = document.getElementById('gs'+i);
-  var img = slot.querySelector('img'); if(img) img.remove();
-  slot.querySelectorAll('svg,p').forEach(function(el){ el.style.display='' });
-  var up = slot.querySelector('.agallery-up'); if(up) up.style.display='';
-  lsSet('gallery_'+i, null);
-  localStorage.removeItem('er_gallery_'+i);
-}
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
-// ═══════════════════════════════════════
-// BEFORE / AFTER SLIDER
-// ═══════════════════════════════════════
-var baDragging = false;
-var baWrap = document.getElementById('baWrap');
-var baDiv  = document.getElementById('baDiv');
-var baClip = document.getElementById('baClip');
-function baPct(e){ var r=baWrap.getBoundingClientRect(), x=(e.clientX||(e.touches&&e.touches[0]?e.touches[0].clientX:0))-r.left; return Math.max(5,Math.min(95,(x/r.width)*100)) }
-function baUpdate(p){ baDiv.style.left=p+'%'; baClip.style.clipPath='inset(0 '+(100-p)+'% 0 0)' }
-baWrap.addEventListener('mousedown',function(e){ baDragging=true; baUpdate(baPct(e)) });
-baWrap.addEventListener('touchstart',function(e){ baDragging=true; baUpdate(baPct(e)) },{passive:true});
-document.addEventListener('mousemove',function(e){ if(baDragging) baUpdate(baPct(e)) });
-document.addEventListener('touchmove',function(e){ if(baDragging) baUpdate(baPct(e)) },{passive:true});
-document.addEventListener('mouseup',function(){ baDragging=false });
-document.addEventListener('touchend',function(){ baDragging=false });
-function setBAPhoto(input, side){
-  if(!input.files||!input.files[0]||!isAdmin) return;
-  uploadToImgBB(input.files[0], function(src, isCloud){
-    var el = document.getElementById(side==='before'?'baBefore':'baAfter');
-    el.style.backgroundImage='url('+src+')'; el.style.backgroundSize='cover'; el.style.backgroundPosition='center';
-    var t = el.querySelector('.ba-txt'); if(t) t.style.display='none';
-    lsSet('ba_'+side, src);
-  });
-}
+/* ─────────────────────────────────────────────
+   STATEMENT — WORD REVEAL
+───────────────────────────────────────────── */
+const stEl = document.querySelector('.statement-text');
+if (stEl) {
+  const words = stEl.textContent.trim().split(/\s+/);
+  stEl.innerHTML = words.map(w => `<span class="word">${w}</span>`).join(' ');
 
-// ═══════════════════════════════════════
-// VIDEO EMBED (admin only)
-// ═══════════════════════════════════════
-function embedVid(i){
-  if(!isAdmin){ alert('Please log in as admin to add videos.'); return }
-  var url = document.getElementById('vu'+i).value.trim(); if(!url) return;
-  var eu = '';
-  if(url.includes('youtube.com/watch')) eu='https://www.youtube.com/embed/'+url.split('v=')[1].split('&')[0];
-  else if(url.includes('youtu.be/')) eu='https://www.youtube.com/embed/'+url.split('youtu.be/')[1];
-  else if(url.includes('tiktok.com')&&url.includes('/video/')) eu='https://www.tiktok.com/embed/'+url.split('/video/')[1];
-  if(eu){ document.getElementById('vs'+i).innerHTML='<iframe src="'+eu+'" allowfullscreen allow="autoplay"></iframe>'; lsSet('video_'+i, eu); }
-  else alert('Please enter a valid YouTube or TikTok URL.');
-}
+  const wordEls = stEl.querySelectorAll('.word');
+  let triggered = false;
 
-// ═══════════════════════════════════════
-// FAQ
-// ═══════════════════════════════════════
-function toggleFaq(btn){ btn.classList.toggle('open'); btn.nextElementSibling.classList.toggle('open') }
-
-// ═══════════════════════════════════════
-// QUOTE FORM
-// ═══════════════════════════════════════
-function handleFormSubmit(event){
-  event.preventDefault();
-  var form = event.target;
-  var fname = form.querySelector('[name="first-name"]').value.trim();
-  var phone = form.querySelector('[name="phone"]').value.trim();
-  var project = form.querySelector('[name="project-type"]').value;
-  if(!fname || !phone || !project){ alert('Please fill in your name, phone number, and project type.'); return; }
-
-  var btn = form.querySelector('.fsub');
-  btn.disabled = true;
-  btn.textContent = 'Sending...';
-
-  // Submit directly to Formspree via fetch
-  var formData = new FormData(form);
-  fetch('https://formspree.io/f/mvzvkjqy', {
-    method: 'POST',
-    body: formData,
-    headers: { 'Accept': 'application/json' }
-  })
-  .then(function(response){
-    if(response.ok){
-      // Save to local leads panel
-      saveLead({
-        name: fname + ' ' + (form.querySelector('[name="last-name"]').value.trim()||''),
-        phone: phone,
-        email: form.querySelector('[name="email"]').value.trim(),
-        project: project,
-        size: (form.querySelector('[name="budget"]').value)||'',
-        estimate: '',
-        source: 'Quote Form'
+  new IntersectionObserver(entries => {
+    if (!triggered && entries[0].isIntersecting) {
+      triggered = true;
+      wordEls.forEach((w, i) => {
+        setTimeout(() => w.classList.add('revealed'), i * 75);
       });
-      document.getElementById('fsuccess').classList.add('on');
-      btn.textContent = 'Sent ✓';
-      btn.style.opacity = '0.5';
-    } else {
-      btn.disabled = false;
-      btn.textContent = 'Send My Quote Request →';
-      alert('Something went wrong. Please try again or call us at (437) 995-0633.');
     }
-  })
-  .catch(function(){
-    btn.disabled = false;
-    btn.textContent = 'Send My Quote Request →';
-    alert('Network error. Please call us directly at (437) 995-0633.');
-  });
+  }, { threshold: 0.25 }).observe(stEl);
 }
 
-// ═══════════════════════════════════════
-// AI CHAT — FULL ESTIMATOR ENGINE
-// ═══════════════════════════════════════
-function openChat(){ if(!chatOpen) toggleChat() }
-function toggleChat(){
-  chatOpen = !chatOpen;
-  document.getElementById('chatWin').classList.toggle('on', chatOpen);
-  if(chatOpen && !document.getElementById('chatMsgs').children.length) startChat();
-  if(chatOpen) document.getElementById('chatIn').focus();
-}
-function startChat(){
-  cs = { stage:'greeting', name:'', phone:'', email:'', project:'', size:'', estimate:'' };
-  botMsg("👋 Hi! I'm the Expert Renovation AI.\n\nI can give you a <strong>free rough estimate</strong> for your project, answer questions about our services, or help you book a consultation.\n\nWhat would you like help with today?");
-}
-function quickAsk(q){
-  document.getElementById('chatQuick').style.display='none';
-  userMsg(q); setTimeout(function(){ processMsg(q) }, 700);
-}
-function sendChat(){
-  var inp=document.getElementById('chatIn'), msg=inp.value.trim(); if(!msg) return;
-  inp.value=''; document.getElementById('chatQuick').style.display='none';
-  userMsg(msg); setTimeout(function(){ processMsg(msg) }, 700);
-}
-function userMsg(txt){
-  var d=document.createElement('div'); d.className='cm user'; d.textContent=txt;
-  var c=document.getElementById('chatMsgs'); c.appendChild(d); c.scrollTop=99999;
-}
-function botMsg(html, delay){
-  delay = delay||0;
-  if(delay){ showTyping(); setTimeout(function(){ hideTyping(); _addBot(html) }, delay+700) }
-  else _addBot(html);
-}
-function _addBot(html){
-  var d=document.createElement('div'); d.className='cm bot'; d.innerHTML=html.replace(/\n/g,'<br>');
-  var c=document.getElementById('chatMsgs'); c.appendChild(d); c.scrollTop=99999;
-}
-function showTyping(){
-  var d=document.createElement('div'); d.className='cm typing'; d.id='typing';
-  d.innerHTML='<div class="tdots"><span></span><span></span><span></span></div>';
-  var c=document.getElementById('chatMsgs'); c.appendChild(d); c.scrollTop=99999;
-}
-function hideTyping(){ var t=document.getElementById('typing'); if(t) t.remove() }
-function showEstCard(range, label){
-  var d=document.createElement('div'); d.className='est-card';
-  d.innerHTML='<div class="est-lbl">Rough Estimate</div><div class="est-range">'+range+'</div><div class="est-note">'+label+' · Subject to free in-home consultation</div>';
-  var c=document.getElementById('chatMsgs'); c.appendChild(d); c.scrollTop=99999;
+/* ─────────────────────────────────────────────
+   HORIZONTAL SCROLL — JS PINNING
+───────────────────────────────────────────── */
+const hSection = document.getElementById('horizontal-section');
+const hTrack   = document.getElementById('horizontal-track');
+const hDots    = document.querySelectorAll('.h-progress-dot');
+const CARDS    = 4;
+
+function updateH() {
+  const rect   = hSection.getBoundingClientRect();
+  const total  = hSection.offsetHeight - window.innerHeight * 0.86;
+  const raw    = -rect.top;
+  const p      = Math.max(0, Math.min(1, raw / total));
+  hTrack.style.transform = `translateX(${-p * (CARDS - 1) * 100}vw)`;
+  const idx = Math.round(p * (CARDS - 1));
+  hDots.forEach((d, i) => d.classList.toggle('active', i === idx));
 }
 
-// ── MAIN MESSAGE PROCESSOR ──
-function processMsg(msg){
-  var m = msg.toLowerCase().trim();
+window.addEventListener('scroll', updateH, { passive: true });
+updateH();
 
-  if(cs.stage==='collecting_name'){
-    cs.name=msg.trim(); cs.stage='collecting_phone';
-    botMsg("Nice to meet you, <strong>"+cs.name+"</strong>! 😊\n\nWhat's the best phone number to reach you at?", 600); return;
-  }
-  if(cs.stage==='collecting_phone'){
-    cs.phone=msg.trim(); cs.stage='collecting_email';
-    botMsg("Got it! And your email address? (Type <em>skip</em> to skip this.)", 600); return;
-  }
-  if(cs.stage==='collecting_email'){
-    cs.email = (m==='skip')?'':msg.trim(); cs.stage='collecting_project';
-    botMsg("Almost there! What type of renovation are you thinking about?\n\n🍳 Kitchen &nbsp; 🚿 Bathroom &nbsp; 🏠 Basement\n➕ Home Addition &nbsp; 🪵 Flooring &nbsp; 🔧 Other", 600); return;
-  }
-  if(cs.stage==='collecting_project'){
-    var proj = detectProject(msg);
-    if(proj){
-      cs.project = proj; cs.stage='collecting_size';
-      var sizeQ = {
-        kitchen:"How large is your kitchen?\n\n• <strong>Small</strong> — under 100 sq ft\n• <strong>Medium</strong> — 100–200 sq ft\n• <strong>Large</strong> — 200–300 sq ft\n• <strong>Extra large</strong> — 300+ sq ft",
-        bathroom:"How large is the bathroom?\n\n• <strong>Small</strong> — powder room / small ensuite\n• <strong>Medium</strong> — standard full bathroom\n• <strong>Large</strong> — master bath\n• <strong>Extra large</strong> — luxury master bath",
-        basement:"How large is your basement area?\n\n• <strong>Small</strong> — under 500 sq ft\n• <strong>Medium</strong> — 500–800 sq ft\n• <strong>Large</strong> — 800–1,200 sq ft\n• <strong>Extra large</strong> — 1,200+ sq ft",
-        addition:"What type of addition are you thinking?\n\n• <strong>Small</strong> — single room / sunroom\n• <strong>Medium</strong> — large room / garage\n• <strong>Large</strong> — partial second storey\n• <strong>Extra large</strong> — full second storey",
-        flooring:"How many square feet of flooring?\n\n• <strong>Small</strong> — under 300 sq ft\n• <strong>Medium</strong> — 300–700 sq ft\n• <strong>Large</strong> — 700–1,200 sq ft\n• <strong>Extra large</strong> — 1,200+ sq ft",
-        contracting:"How large is the project scope?\n\n• <strong>Small</strong> — single trade\n• <strong>Medium</strong> — multi-room\n• <strong>Large</strong> — whole home\n• <strong>Extra large</strong> — commercial"
-      };
-      botMsg(sizeQ[proj]||"What size would you say the project is?\n(Small / Medium / Large / Extra Large)", 700);
-    } else {
-      botMsg("I want to give you the most accurate estimate! Which best describes your project?\n\n🍳 Kitchen &nbsp; 🚿 Bathroom &nbsp; 🏠 Basement\n➕ Home Addition &nbsp; 🪵 Flooring &nbsp; 🔧 General Contracting", 700);
-    }
-    return;
-  }
-  if(cs.stage==='collecting_size'){
-    var sz = detectSize(msg)||'medium';
-    cs.size = sz; var est = calcEstimate(cs.project, sz);
-    var pLabel = PRICING[cs.project]?PRICING[cs.project].label:cs.project;
-    cs.estimate = est; cs.stage='collected';
-    saveLead({name:cs.name, phone:cs.phone, email:cs.email, project:pLabel+' ('+sz+')', size:sz, estimate:est});
-    showTyping();
-    setTimeout(function(){
-      hideTyping();
-      _addBot("Thanks <strong>"+cs.name+"</strong>! Based on what you've told me, here's a rough estimate for your "+pLabel.toLowerCase()+":");
-      setTimeout(function(){
-        showEstCard(est, pLabel+' · '+sz+' size');
-        setTimeout(function(){
-          _addBot("📝 This is a <strong>rough ballpark</strong> — the exact price depends on materials, finishes, and site conditions.\n\nWould you like to book a <strong>free in-home consultation</strong> to get a precise itemized quote? (Yes / No)");
-          document.getElementById('chatMsgs').scrollTop=99999;
-        },400);
-      },800);
-    },1000);
-    return;
-  }
-  if(cs.stage==='collected'){
-    if(m.includes('yes')||m.includes('sure')||m.includes('ok')||m.includes('book')||m.includes('yeah')||m.includes('please')){
-      cs.stage='followup';
-      botMsg("🎉 Excellent! I've saved your details. A member of our team will call you at <strong>"+cs.phone+"</strong> within one business day to schedule your free consultation.\n\nYou can also reach us directly:\n📞 <strong>(437) 995-0633</strong>\n\nIs there anything else I can help you with?", 800);
-    } else if(m.includes('no')||m.includes('not yet')||m.includes('later')||m.includes('maybe')){
-      cs.stage='followup';
-      botMsg("No problem at all! 😊 Feel free to come back anytime. In the meantime:\n\n• Call us at <strong>(437) 995-0633</strong>\n• Fill out the quote form at the bottom of this page\n• Browse our gallery for inspiration\n\nIs there anything else I can help you with?", 800);
-    } else { generalReply(msg) }
-    return;
-  }
-  generalReply(msg);
+/* ─────────────────────────────────────────────
+   PARALLAX — SPLIT IMAGE
+───────────────────────────────────────────── */
+const parallax = document.getElementById('parallax-image');
+const splitSec = document.getElementById('split-feature');
+
+function updateParallax() {
+  const r = splitSec.getBoundingClientRect();
+  const offset = (r.top + r.height / 2 - window.innerHeight / 2) * 0.1;
+  parallax.style.transform = `translateY(${offset}px)`;
 }
 
-function generalReply(msg){
-  var m = msg.toLowerCase();
-  if(m.includes('estimate')||m.includes('price')||m.includes('cost')||m.includes('how much')||m.includes('quote')){
-    cs.stage='collecting_name';
-    botMsg("I'd love to help with a free estimate! 💰\n\nI just need a few quick details first.\n\nWhat's your name?", 800);
-  } else if(m.includes('kitchen')){
-    botMsg("🍳 <strong>Kitchen Remodeling</strong> starts from <strong>$15,000</strong>.\n\nWe handle cabinets, countertops (quartz, granite, laminate), backsplash, island design, lighting, plumbing, flooring, and painting — all in one project.\n\nWant a rough estimate for your specific kitchen?", 900);
-  } else if(m.includes('bathroom')||m.includes('bath')){
-    botMsg("🚿 <strong>Bathroom Renovations</strong> start from <strong>$8,000</strong>.\n\nWe do full gut-and-rebuilds, tile showers, vanities, soaker tubs, heated floors, and more. A standard full bathroom runs $12,000–$25,000.\n\nWant a rough estimate for yours?", 900);
-  } else if(m.includes('basement')){
-    botMsg("🏠 <strong>Basement Finishing</strong> starts from <strong>$25,000</strong>.\n\nWe handle framing, insulation, drywall, flooring, pot lights, bathrooms, and secondary suites — all done to code with permits.\n\nWant me to estimate the cost for your basement?", 900);
-  } else if(m.includes('floor')||m.includes('tile')||m.includes('hardwood')){
-    botMsg("🪵 <strong>Flooring &amp; Tiling</strong> starts from <strong>$3,000</strong>.\n\nWe supply and install hardwood, laminate, luxury vinyl, ceramic, and porcelain tile. Price depends on material and square footage.\n\nWant a rough estimate based on your space?", 900);
-  } else if(m.includes('addition')){
-    botMsg("➕ <strong>Home Additions</strong> start from <strong>$40,000</strong>.\n\nWe build sunrooms, second storeys, garages, and main floor expansions — all with full permit coordination.\n\nWant me to estimate the cost?", 900);
-  } else if(m.includes('financ')||m.includes('payment')||m.includes('monthly')){
-    botMsg("💳 <strong>Yes, we offer flexible financing!</strong>\n\n• <strong>Pay As You Go</strong> — milestone payments, no interest\n• <strong>0% Financing</strong> — spread cost over 12–24 months\n• <strong>Custom Plans</strong> — for projects over $50K\n\nAsk about financing when booking your free consultation!", 900);
-  } else if(m.includes('area')||m.includes('serve')||m.includes('city')||m.includes('london')||m.includes('brampton')){
-    botMsg("📍 We serve <strong>London, Brampton, Mississauga, Kitchener, Cambridge, Guelph, Hamilton, Brantford, Woodstock, St. Thomas</strong> and surrounding areas.\n\nNot sure if we cover you? Call <strong>(437) 995-0633</strong>!", 900);
-  } else if(m.includes('how long')||m.includes('timeline')||m.includes('week')){
-    botMsg("⏱️ <strong>Typical timelines:</strong>\n\n• Bathroom: 1–2 weeks\n• Kitchen: 3–5 weeks\n• Basement: 4–8 weeks\n• Home addition: 8–20 weeks\n\nWe give you a specific schedule before starting and stick to it.", 900);
-  } else if(m.includes('permit')){
-    botMsg("📋 <strong>Yes — we handle all permits!</strong>\n\nWe coordinate with the city on your behalf. All work meets Ontario Building Code. You don't deal with any paperwork.", 900);
-  } else if(m.includes('guarantee')||m.includes('warranty')){
-    botMsg("✅ <strong>All our work is guaranteed.</strong>\n\nWe do a thorough final walkthrough and fix any deficiencies before considering a job complete. Full workmanship warranty included on every project.", 900);
-  } else if(m.includes('book')||m.includes('consult')||m.includes('appointment')){
-    botMsg("📅 <strong>Getting started is easy!</strong>\n\n• Call <strong>(437) 995-0633</strong>\n• Or fill out the quote form at the bottom of this page\n\nWe'll come to your home at a time that works for you — no obligation, no pressure!", 900);
-  } else if(m.includes('hello')||m.includes('hi')||m.includes('hey')){
-    botMsg("👋 Hi there! I'm the Expert Renovation AI. I can:\n\n• 💰 Give you a <strong>free rough estimate</strong>\n• 🔨 Explain our services &amp; pricing\n• 📅 Help you book a free consultation\n\nWhat would you like help with?", 700);
-  } else {
-    botMsg("Thanks for your message! I can help with:\n\n• 💰 <strong>Free estimates</strong> — say 'I want an estimate'\n• 🔨 <strong>Service info</strong> — kitchen, bathroom, basement etc.\n• 📅 <strong>Booking</strong> a free consultation\n\nOr call us directly at <strong>(437) 995-0633</strong>!", 900);
-  }
-}
+window.addEventListener('scroll', updateParallax, { passive: true });
+updateParallax();
 
-// Escape key closes login modal
-document.addEventListener('keydown',function(e){
-  if(e.key==='Escape'){ closeLogin(); closeLeads(); }
-});
+/* ─────────────────────────────────────────────
+   MARQUEE — PAUSE ON HOVER
+───────────────────────────────────────────── */
+const mq = document.getElementById('marquee-track');
+mq.addEventListener('mouseenter', () => mq.style.animationPlayState = 'paused');
+mq.addEventListener('mouseleave', () => mq.style.animationPlayState = 'running');
 </script>
 </body>
 </html>
